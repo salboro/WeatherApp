@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="decrees_format">%1$d degrees celsius</string>
+    <string name="pressure_format">Pressure is %1$d</string>
+    <string name="condition_and_sediment_format">Weather is %1$s, sediment is %2$.1f mm</string>
 </resources>
