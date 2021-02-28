@@ -29,8 +29,6 @@ class ListFragment : Fragment() {
         val binding: FragmentListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_list, container, false)
 
-
-        Log.i("asd", "adsa")
         cityRepository = CityRepository()
 
         val adapter = CitiesAdapter(CityClickListener { city ->
@@ -42,7 +40,6 @@ class ListFragment : Fragment() {
     }
 
     private fun onCityClicked(city: City) {
-        Log.i("asd", "adsa")
         this.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(city.name))
     }
 }

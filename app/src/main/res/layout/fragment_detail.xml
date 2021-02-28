@@ -61,7 +61,7 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/degrees"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/degrees"
-                    tools:text="asfasfsaf" />
+                    tools:text="756" />
 
                 <TextView
                     android:id="@+id/cityNameText"
@@ -78,7 +78,7 @@
                     app:layout_constraintHorizontal_bias="0.222"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="asfasfsaf" />
+                    tools:text="Tomsk" />
 
                 <TextView
                     android:id="@+id/countryText"
@@ -93,7 +93,7 @@
                     app:layout_constraintBaseline_toBaselineOf="@+id/cityNameText"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cityNameText"
-                    tools:text="asfasfsaf" />
+                    tools:text="RU" />
 
                 <View
                     android:id="@+id/separator"
@@ -120,7 +120,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/pressure"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cityNameText"
-                    tools:text="asfasfsaf" />
+                    tools:text="-25" />
 
                 <TextView
                     android:id="@+id/condition"
@@ -137,7 +137,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pressure"
-                    tools:text="asfasfsaf" />
+                    tools:text="sunny" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

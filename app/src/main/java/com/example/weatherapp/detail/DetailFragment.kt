@@ -34,14 +34,5 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-//    private fun imageChose(binding: FragmentDetailBinding) {
-//        when (binding.city.weather.condition) {
-//            "snowy" -> binding.conditionImage.setImageResource(R.mipmap.ic_snow_icon_foreground)
-//            "rainy" -> binding.conditionImage.setImageResource(R.mipmap.ic_rain_icon_foreground)
-//            "cloudy" -> binding.conditionImage.setImageResource(R.mipmap.ic_cloud_icon_foreground)
-//            else -> binding.conditionImage.setImageResource(R.mipmap.ic_sun_icon_foreground)
-//        }
-//
-//    }
 
 }
