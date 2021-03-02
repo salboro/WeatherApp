@@ -1,10 +1,15 @@
 package com.example.weatherapp.detail
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.data.City
@@ -46,11 +51,36 @@ class DetailFragment : Fragment() {
             when (city.weather.condition) {
                 "snowy" -> binding.conditionImage.setImageResource(R.mipmap.ic_snow_icon_foreground)
                 "rainy" -> binding.conditionImage.setImageResource(R.mipmap.ic_rain_icon_foreground)
-                "cloudy" -> binding.conditionImage.setImageResource(R.mipmap.ic_cloud_icon_foreground)
+                "cloudy" -> binding.conditionImage.setImageResource(R.mipmap.ic_only_cloud_icon_foreground)
                 else -> binding.conditionImage.setImageResource(R.mipmap.ic_sun_icon_foreground)
             }
         }
     }
 
+    private fun rotate() {
+        when (viewModel.city.value?.weather?.condition){
+            "sunny" -> {
+                val animator = ObjectAnimator.ofFloat(binding.conditionImage, View.ROTATION, 360f, 0f)
+                animator.duration = 10000
+                animator.repeatCount = Animation.INFINITE
+                animator.interpolator = LinearInterpolator()
+                animator.start()
+            }
+            "cloudy" -> {
+                binding.sunForCloud.visibility = View.VISIBLE
+                val animator = ObjectAnimator.ofFloat(binding.sunForCloud, View.ROTATION, 360f, 0f)
+                animator.duration = 10000
+                animator.repeatCount = Animation.INFINITE
+                animator.interpolator = LinearInterpolator()
+                animator.start()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.sunForCloud.visibility = View.GONE
+        rotate()
+    }
 
 }
