@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
@@ -19,27 +19,38 @@ import com.example.weatherapp.repositories.CityRepository
 
 class ListFragment : Fragment() {
 
-    private lateinit var cityRepository: CityRepository
+    private lateinit var binding: FragmentListBinding
+    private lateinit var viewModel: ListViewModel
+    private lateinit var viewModelFactory: ListViewModelFactory
+    private val adapter = CitiesAdapter(::onCityClicked)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentListBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_list, container, false)
-
-        cityRepository = CityRepository()
-
-        val adapter = CitiesAdapter(CityClickListener { city ->
-            onCityClicked(city)
-        })
-        adapter.data = cityRepository.getCities()
+        binding = FragmentListBinding.inflate(inflater, container, false)
+        viewModelFactory = ListViewModelFactory(CityRepository())
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
+        viewModel.cityList.observe(viewLifecycleOwner) { cityList ->
+            bindCitiesList(cityList)
+        }
         binding.citiesList.adapter = adapter
         return binding.root
     }
 
+    fun bindCitiesList(list: List<City>) {
+        adapter.data = list
+    }
+
     private fun onCityClicked(city: City) {
-        this.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(city.name))
+        this.findNavController()
+            .navigate(ListFragmentDirections.actionListFragmentToDetailFragment(city.name))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCities()
     }
 }
