@@ -1,4 +1,4 @@
-package com.example.weatherapp.data
+package com.example.weatherapp.domain
 
 data class Weather(
     val degreesC: Int,

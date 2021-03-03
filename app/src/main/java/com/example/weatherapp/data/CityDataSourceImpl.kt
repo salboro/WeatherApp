@@ -1,9 +1,10 @@
-package com.example.weatherapp.repositories
+package com.example.weatherapp.data
 
-import com.example.weatherapp.data.City
-import com.example.weatherapp.data.Weather
+import com.example.weatherapp.domain.City
+import com.example.weatherapp.domain.Weather
 
-class CityRepository {
+class CityDataSourceImpl: CityDataSource {
+
     private val cities = mutableListOf<City>(
         City(name = "Moscow", country = "RU", Weather(-10, 748, 0.1f, "snowy")),
         City(name = "Athens", country = "GR", Weather(14, 762, 0f, "cloudy")),
@@ -16,7 +17,8 @@ class CityRepository {
         City(name = "Tomsk", country = "RU", Weather(-21, 763, 0f, "cloudy"))
     )
 
-    fun getCities(): List<City> = cities
+    override fun getCities(): List<City> = cities
 
-    fun getCity(name: String): City? = cities.firstOrNull { it.name == name }
+    override fun getCity(cityName: String): City? = cities.firstOrNull { it.name == cityName }
+
 }

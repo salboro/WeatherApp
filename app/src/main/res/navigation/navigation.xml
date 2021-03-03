@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.weatherapp.list.ListFragment"
+        android:name="com.example.weatherapp.presentation.list.ListFragment"
         android:label="City list" >
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.weatherapp.detail.DetailFragment"
+        android:name="com.example.weatherapp.presentation.detail.DetailFragment"
         android:label="Weather in city"
         tools:layout="@layout/fragment_detail" >
         <argument

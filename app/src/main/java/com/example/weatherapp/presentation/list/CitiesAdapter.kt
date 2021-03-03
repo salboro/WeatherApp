@@ -1,10 +1,10 @@
-package com.example.weatherapp.list
+package com.example.weatherapp.presentation.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
-import com.example.weatherapp.data.City
+import com.example.weatherapp.domain.City
 import com.example.weatherapp.databinding.CityItemViewBinding
 
 class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<CityViewHolder>() {

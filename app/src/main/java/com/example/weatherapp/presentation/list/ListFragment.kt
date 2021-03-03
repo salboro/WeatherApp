@@ -1,20 +1,15 @@
-package com.example.weatherapp.list
+package com.example.weatherapp.presentation.list
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.R
-import com.example.weatherapp.data.City
+import com.example.weatherapp.domain.City
 import com.example.weatherapp.databinding.FragmentListBinding
-import com.example.weatherapp.detail.DetailFragment
-import com.example.weatherapp.repositories.CityRepository
+import com.example.weatherapp.domain.CityRepository
 
 
 class ListFragment : Fragment() {
@@ -31,7 +26,7 @@ class ListFragment : Fragment() {
     ): View? {
 
         binding = FragmentListBinding.inflate(inflater, container, false)
-        viewModelFactory = ListViewModelFactory(CityRepository())
+        viewModelFactory = ListViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
         viewModel.cityList.observe(viewLifecycleOwner) { cityList ->
             bindCitiesList(cityList)
