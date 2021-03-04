@@ -21,7 +21,7 @@
         android:label="Weather in city"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="cityName"
-            app:argType="string" />
+            android:name="cityId"
+            app:argType="long" />
     </fragment>
 </navigation>

@@ -1,8 +1,12 @@
 package com.example.weatherapp.domain
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.weatherapp.data.database.CityWeather
+
 interface CityRepository {
 
-    fun getCities(): List<City>
+    fun getCities(): LiveData<List<CityWeather>>
 
-    fun getCity(name: String): City?
+    suspend fun getCity(id: Long): CityWeather?
 }

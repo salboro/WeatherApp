@@ -2,19 +2,20 @@ package com.example.weatherapp.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.data.CityDataSource
-import com.example.weatherapp.data.CityDataSourceImpl
+import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.data.CityRepositoryImpl
+import com.example.weatherapp.data.database.WeatherAppDatabase
+import com.example.weatherapp.data.database.WeatherAppDatabaseDao
 import com.example.weatherapp.domain.CityRepository
 import com.example.weatherapp.domain.GetCitiesUseCase
 import java.lang.IllegalArgumentException
+import javax.sql.DataSource
 
-class ListViewModelFactory : ViewModelProvider.Factory {
+class ListViewModelFactory(private val dataSource: WeatherAppDatabaseDao) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
-            val cityDataSource = CityDataSourceImpl()
-            val cityRepository = CityRepositoryImpl(cityDataSource)
+            val cityRepository = CityRepositoryImpl(dataSource)
             val getCitiesUseCase = GetCitiesUseCase(cityRepository)
             return ListViewModel(getCitiesUseCase) as T
         }

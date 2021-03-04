@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
-import com.example.weatherapp.domain.City
+import com.example.weatherapp.data.database.CityWeather
 import com.example.weatherapp.databinding.CityItemViewBinding
 
-class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<CityViewHolder>() {
+class CitiesAdapter(private val onClick: (CityWeather) -> Unit) : RecyclerView.Adapter<CityViewHolder>() {
 
-    var data: List<City> = emptyList()
+    var data: List<CityWeather> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,17 +30,17 @@ class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<
 
 }
 
-class CityViewHolder(private val binding: CityItemViewBinding, private val onClick: (City) -> Unit): RecyclerView.ViewHolder(binding.root) {
+class CityViewHolder(private val binding: CityItemViewBinding, private val onClick: (CityWeather) -> Unit): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(city: City) {
-        setViewProperties(city)
-        binding.root.setOnClickListener { onClick(city) }
+    fun bind(cityWeather: CityWeather) {
+        setViewProperties(cityWeather)
+        binding.root.setOnClickListener { onClick(cityWeather) }
     }
 
-    private fun setViewProperties(city: City){
-        binding.cityNameText.text = city.name
-        binding.countryText.text = city.country
-        when (city.weather.condition) {
+    private fun setViewProperties(cityWeather: CityWeather){
+        binding.cityNameText.text = cityWeather.name
+        binding.countryText.text = cityWeather.country
+        when (cityWeather.condition) {
             "snowy" -> binding.conditionImage.setImageResource(R.mipmap.ic_snow_icon_foreground)
             "rainy" -> binding.conditionImage.setImageResource(R.mipmap.ic_rain_icon_foreground)
             "cloudy" -> binding.conditionImage.setImageResource(R.mipmap.ic_cloud_icon_foreground)

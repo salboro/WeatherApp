@@ -1,8 +1,12 @@
 package com.example.weatherapp.domain
 
-class GetCityUseCase(private val cityRepository: CityRepository, private val cityName: String) {
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.weatherapp.data.database.CityWeather
 
-    operator fun invoke(cityName: String): City? {
-        return cityRepository.getCity(cityName)
+class GetCityUseCase(private val cityRepository: CityRepository, private val cityId: Long) {
+
+    suspend operator fun invoke(cityId: Long): CityWeather? {
+        return cityRepository.getCity(cityId)
     }
 }
