@@ -11,7 +11,9 @@
         android:label="City list" >
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_top"
+            app:popEnterAnim="@anim/slide_bottom" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
