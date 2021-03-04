@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation.list
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.domain.City
@@ -8,10 +9,13 @@ import com.example.weatherapp.domain.GetCitiesUseCase
 
 class ListViewModel(private val getCitiesUseCase: GetCitiesUseCase): ViewModel() {
 
-    val cityList = MutableLiveData<List<City>>()
+    private val _cityList = MutableLiveData<List<City>>()
+
+    val cityList: LiveData<List<City>>
+        get() = _cityList
 
     fun getCities() {
-        cityList.value = getCitiesUseCase()
+        _cityList.value = getCitiesUseCase()
     }
 
 }
