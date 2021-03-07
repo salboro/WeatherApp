@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -25,7 +26,6 @@ abstract class WeatherAppDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         WeatherAppDatabase::class.java, "weatherApp_database")
-
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance
@@ -33,6 +33,5 @@ abstract class WeatherAppDatabase: RoomDatabase() {
                 return instance
             }
         }
-
     }
 }

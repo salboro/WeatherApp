@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.data.database.CityWeather
 import com.example.weatherapp.data.database.WeatherAppDatabase
+import com.example.weatherapp.data.network.City
+import com.example.weatherapp.data.network.WeatherApi
+import com.example.weatherapp.data.network.WeatherApiService
 import com.example.weatherapp.databinding.FragmentListBinding
 
 
@@ -31,20 +34,22 @@ class ListFragment : Fragment() {
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
         viewModelFactory = ListViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
+
         viewModel.cityList.observe(viewLifecycleOwner) { cityList ->
             bindCitiesList(cityList)
         }
+
         binding.citiesList.adapter = adapter
         return binding.root
     }
 
-    fun bindCitiesList(list: List<CityWeather>) {
+    private fun bindCitiesList(list: List<City>) {
         adapter.data = list
     }
 
-    private fun onCityClicked(cityWeather: CityWeather) {
+    private fun onCityClicked(city: City) {
         this.findNavController()
-            .navigate(ListFragmentDirections.actionListFragmentToDetailFragment(cityWeather.id))
+            .navigate(ListFragmentDirections.actionListFragmentToDetailFragment(city))
     }
 
     override fun onResume() {

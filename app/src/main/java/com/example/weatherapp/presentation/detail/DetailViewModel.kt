@@ -5,21 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.data.database.CityWeather
+import com.example.weatherapp.data.network.City
 import com.example.weatherapp.domain.GetCityUseCase
 import kotlinx.coroutines.launch
 
-class DetailViewModel(getCityUseCase: GetCityUseCase, cityId: Long = 0L): ViewModel() {
+class DetailViewModel(city: City): ViewModel() {
 
-    private var _city = MutableLiveData<CityWeather>()
+    private var _city = MutableLiveData<City>()
 
-    val city: LiveData<CityWeather>
+    val city: LiveData<City>
         get() = _city
 
     init {
-        viewModelScope.launch {
-            _city.value = getCityUseCase(cityId)
-            Log.i("db", "gotHim")
-        }
+            _city.value = city
     }
 }

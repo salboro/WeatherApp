@@ -4,12 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
+import com.example.weatherapp.bindImage
 import com.example.weatherapp.data.database.CityWeather
+import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.CityItemViewBinding
+import kotlin.math.asin
+import kotlin.math.cos
+import kotlin.math.sqrt
 
-class CitiesAdapter(private val onClick: (CityWeather) -> Unit) : RecyclerView.Adapter<CityViewHolder>() {
+class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<CityViewHolder>() {
 
-    var data: List<CityWeather> = emptyList()
+    var data: List<City> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,21 +35,37 @@ class CitiesAdapter(private val onClick: (CityWeather) -> Unit) : RecyclerView.A
 
 }
 
-class CityViewHolder(private val binding: CityItemViewBinding, private val onClick: (CityWeather) -> Unit): RecyclerView.ViewHolder(binding.root) {
+class CityViewHolder(private val binding: CityItemViewBinding, private val onClick: (City) -> Unit): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(cityWeather: CityWeather) {
+    fun bind(cityWeather: City) {
         setViewProperties(cityWeather)
         binding.root.setOnClickListener { onClick(cityWeather) }
     }
 
-    private fun setViewProperties(cityWeather: CityWeather){
-        binding.cityNameText.text = cityWeather.name
-        binding.countryText.text = cityWeather.country
-        when (cityWeather.condition) {
-            "snowy" -> binding.conditionImage.setImageResource(R.mipmap.ic_snow_icon_foreground)
-            "rainy" -> binding.conditionImage.setImageResource(R.mipmap.ic_rain_icon_foreground)
-            "cloudy" -> binding.conditionImage.setImageResource(R.mipmap.ic_cloud_icon_foreground)
-            else -> binding.conditionImage.setImageResource(R.mipmap.ic_sun_icon_foreground)
+    private fun setViewProperties(city: City){
+        binding.cityNameText.text = city.name
+        binding.countryText.text = city.country.name
+        bindImage(binding.conditionImage, city.weather[0].icon)
+        val distance = calculateDistance(
+            56.488430,
+            84.948047,
+            city.coordinate.latitude,
+            city.coordinate.longitude
+        )
+        if (distance <= 1) {
+            binding.distanceText.text = "Less than one kilometre from you"
+        } else {
+            binding.distanceText.text = "${distance.toInt()} kilometers from you"
         }
+
+    }
+
+    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val p = 0.017453292519943295;    // Math.PI / 180
+        val a = 0.5 - cos((lat2 - lat1) * p) /2 +
+                cos(lat1 * p) * cos(lat2 * p) *
+                (1 - cos((lon2 - lon1) * p))/2;
+
+        return 12742 * asin(sqrt(a)); // 2 * R; R = 6371 km
     }
 }

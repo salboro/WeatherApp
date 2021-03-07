@@ -4,5 +4,6 @@
     <string name="city_and_country_name_format">%1$s    %2$s</string>
     <string name="decrees_format">%1$d</string>
     <string name="pressure_format">Pressure is %1$d</string>
-    <string name="condition_and_sediment_format">Weather is %1$s, sediment is %2$.1f mm</string>
+    <string name="condition_and_sediment_format">Weather is %1$s, sediment is %2$d mm</string>
+    <string name="destination_format">%1$.1f kilometers from you</string>
 </resources>
