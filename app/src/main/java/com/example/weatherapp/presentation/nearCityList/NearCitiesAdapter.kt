@@ -19,7 +19,12 @@ class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<
             notifyDataSetChanged()
         }
 
-    lateinit var location: Location
+    var location: Location? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
 
     override fun getItemCount(): Int = data.count()
 
@@ -33,13 +38,6 @@ class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<
         val item = data[position]
         holder.bind(item, location)
     }
-
-
-    // ToDo: Make entity for current location history
-    fun fetchLocation(location: Location) {
-        this.location = location
-    }
-
 }
 
 class CityViewHolder(
@@ -48,9 +46,11 @@ class CityViewHolder(
     private val onClick: (City) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(cityWeather: City, location: Location) {
-        setViewProperties(cityWeather, location)
-        binding.root.setOnClickListener { onClick(cityWeather) }
+    fun bind(cityWeather: City, location: Location?) {
+        if (location != null) {
+            setViewProperties(cityWeather, location)
+            binding.root.setOnClickListener { onClick(cityWeather) }
+        }
     }
 
     private fun setViewProperties(city: City, location: Location) {
@@ -77,11 +77,11 @@ class CityViewHolder(
     }
 
     private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-        val p = 0.017453292519943295;    // Math.PI / 180
-        val a = 0.5 - cos((lat2 - lat1) * p) /2 +
+        val p = 0.017453292519943295    // Math.PI / 180
+        val a = 0.5 - cos((lat2 - lat1) * p) / 2 +
                 cos(lat1 * p) * cos(lat2 * p) *
-                (1 - cos((lon2 - lon1) * p))/2;
+                (1 - cos((lon2 - lon1) * p)) / 2
 
-        return 12742 * asin(sqrt(a)); // 2 * R; R = 6371 km
+        return 12742 * asin(sqrt(a)) // 2 * R; R = 6371 km
     }
 }

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,8 +20,7 @@ import java.util.concurrent.TimeUnit
 
 class WeatherAppLocationService(
     private val context: Context,
-    private val activity: Activity,
-    private val bindCitiesList: (location: Location) -> Unit
+    private val activity: Activity
 ) {
 
     private val REQUEST_LOCATION_PERMISSION = 1
@@ -34,15 +34,18 @@ class WeatherAppLocationService(
     private var locationService: FusedLocationProviderClient = FusedLocationProviderClient(context)
 
 
-    suspend fun getLastLocation() {
+    fun getLastLocation(setLocation: (location: Location?) -> Unit) {
         checkPermission()
         if (isPermissionChecked) {
             if (isLocationEnable()) {
                 locationService.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
-                        bindCitiesList(location)
+                        Log.i("locate", location.latitude.toString())
+                        setLocation(location)
+                        requestNewLocation(setLocation)
                     } else {
-                        requestNewLocation()
+                        Log.i("locate", "1")
+                        requestNewLocation(setLocation)
                     }
                 }
             } else {
@@ -55,29 +58,24 @@ class WeatherAppLocationService(
         }
     }
 
-    fun requestNewLocation() {
+    fun requestNewLocation(setLocation: (location: Location?) -> Unit) {
         locationRequest = LocationRequest.create().apply {
-            interval = TimeUnit.SECONDS.toMillis(60)
-            fastestInterval = TimeUnit.SECONDS.toMillis(5)
-            maxWaitTime = TimeUnit.MINUTES.toMillis(2)
+            interval = TimeUnit.SECONDS.toMillis(5)
+            fastestInterval = TimeUnit.SECONDS.toMillis(0)
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            numUpdates = 1
         }
+
+        Log.i("locate", "2")
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 checkPermission()
-                locationService.lastLocation.addOnSuccessListener { location ->
-                    if (location != null) {
-                        bindCitiesList(location)
-                    } else {
-                        requestNewLocation()
-                    }
-                }
+                setLocation(locationResult.lastLocation)
             }
         }
 
-        checkPermission()
         locationService.requestLocationUpdates(
             locationRequest,
             locationCallback,

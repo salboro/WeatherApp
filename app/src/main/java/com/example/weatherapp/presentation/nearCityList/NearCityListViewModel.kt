@@ -5,32 +5,40 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.data.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.domain.GetCitiesUseCase
 import kotlinx.coroutines.launch
 
-class NearCityListViewModel(private val getCitiesUseCase: GetCitiesUseCase) : ViewModel() {
+class NearCityListViewModel(
+    private val getCitiesUseCase: GetCitiesUseCase,
+    private val weatherAppLocationService: WeatherAppLocationService
+) : ViewModel() {
 
     private var _cityList = MutableLiveData<List<City>>()
 
     val cityList: LiveData<List<City>>
         get() = _cityList
 
-    private lateinit var location: Location
+    private var _location = MutableLiveData<Location?>()
 
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
+    val location: LiveData<Location?>
+        get() = _location
 
-    private fun getCities() {
+    fun getCities() {
         viewModelScope.launch {
-            _cityList.value = getCitiesUseCase(location.latitude, location.longitude)
+            if (location.value != null) {
+                _cityList.value =
+                    getCitiesUseCase(_location.value!!.latitude, location.value!!.longitude)
+            }
         }
     }
 
-    fun fetchLocation(location: Location) {
-        this.location = location
-        getCities()
+    fun setLocation() {
+        viewModelScope.launch {
+            weatherAppLocationService.getLastLocation {
+                _location.value = it
+            }
+        }
     }
-
-
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.data.WeatherAppLocationService
 import com.example.weatherapp.data.database.WeatherAppDatabase
@@ -16,7 +15,6 @@ import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentListNearBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.launch
 
 class NearCityListFragment : Fragment() {
 
@@ -38,24 +36,24 @@ class NearCityListFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
         locationService = LocationServices.getFusedLocationProviderClient(requireActivity())
-        viewModelFactory = NearCityListViewModelFactory(dataSource)
+
+        weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
+
+        viewModelFactory = NearCityListViewModelFactory(dataSource, weatherAppLocationService)
         viewModelNearCity =
             ViewModelProvider(this, viewModelFactory).get(NearCityListViewModel::class.java)
         adapter = CitiesAdapter(::onCityClicked)
+        binding.citiesList.adapter = adapter
 
-        weatherAppLocationService =
-            WeatherAppLocationService(requireContext(), requireActivity()) { location ->
-                viewModelNearCity.fetchLocation(location)
-                adapter.fetchLocation(location)
-                binding.citiesList.adapter = adapter
-                viewModelNearCity.cityList.observe(viewLifecycleOwner, Observer { cities ->
-                    bindCitiesList(cities)
-                })
-            }
+        viewModelNearCity.setLocation()
 
-        lifecycleScope.launch {
-            weatherAppLocationService.getLastLocation()
-        }
+        viewModelNearCity.location.observe(viewLifecycleOwner, Observer {
+            viewModelNearCity.getCities()
+        })
+
+        viewModelNearCity.cityList.observe(viewLifecycleOwner, Observer { cities ->
+            bindCitiesList(cities)
+        })
 
         refreshApp()
 
@@ -64,15 +62,14 @@ class NearCityListFragment : Fragment() {
 
     private fun refreshApp() {
         binding.swipeRefresh.setOnRefreshListener {
-            lifecycleScope.launch {
-                weatherAppLocationService.requestNewLocation()
+            viewModelNearCity.setLocation()
                 binding.swipeRefresh.isRefreshing = false
-            }
         }
     }
 
     private fun bindCitiesList(list: List<City>) {
         adapter.data = list
+        adapter.location = viewModelNearCity.location.value
     }
 
     private fun onCityClicked(city: City) {
