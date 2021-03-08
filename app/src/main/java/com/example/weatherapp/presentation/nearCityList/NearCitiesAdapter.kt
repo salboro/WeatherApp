@@ -1,11 +1,10 @@
-package com.example.weatherapp.presentation.list
+package com.example.weatherapp.presentation.nearCityList
 
+import android.content.Context
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.R
-import com.example.weatherapp.bindImage
-import com.example.weatherapp.data.database.CityWeather
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.CityItemViewBinding
 import kotlin.math.asin
@@ -20,35 +19,52 @@ class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<
             notifyDataSetChanged()
         }
 
+    lateinit var location: Location
+
     override fun getItemCount(): Int = data.count()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CityItemViewBinding.inflate(layoutInflater, parent, false)
-        return CityViewHolder(binding, onClick)
+        return CityViewHolder(binding, parent.context, onClick)
     }
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
         val item = data[position]
-        holder.bind(item)
+        holder.bind(item, location)
+    }
+
+
+    // ToDo: Make entity for current location history
+    fun fetchLocation(location: Location) {
+        this.location = location
     }
 
 }
 
-class CityViewHolder(private val binding: CityItemViewBinding, private val onClick: (City) -> Unit): RecyclerView.ViewHolder(binding.root) {
+class CityViewHolder(
+    private val binding: CityItemViewBinding,
+    private val context: Context,
+    private val onClick: (City) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(cityWeather: City) {
-        setViewProperties(cityWeather)
+    fun bind(cityWeather: City, location: Location) {
+        setViewProperties(cityWeather, location)
         binding.root.setOnClickListener { onClick(cityWeather) }
     }
 
-    private fun setViewProperties(city: City){
+    private fun setViewProperties(city: City, location: Location) {
         binding.cityNameText.text = city.name
         binding.countryText.text = city.country.name
-        bindImage(binding.conditionImage, city.weather[0].icon)
+        binding.conditionImage.setImageResource(
+            context.resources.getIdentifier(
+                "ic_${city.weather[0].icon}",
+                "drawable", context.packageName
+            )
+        )
         val distance = calculateDistance(
-            56.488430,
-            84.948047,
+            location.latitude,
+            location.longitude,
             city.coordinate.latitude,
             city.coordinate.longitude
         )

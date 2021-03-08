@@ -1,16 +1,11 @@
 package com.example.weatherapp.data.database
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 
-@Database(entities = [CityWeather::class], version = 1, exportSchema = false)
+@Database(entities = [FavoriteCities::class], version = 1, exportSchema = false)
 abstract class WeatherAppDatabase: RoomDatabase() {
     abstract val weatherAppDatabaseDao: WeatherAppDatabaseDao
 

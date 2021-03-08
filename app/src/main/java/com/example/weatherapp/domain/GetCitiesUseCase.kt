@@ -1,12 +1,10 @@
 package com.example.weatherapp.domain
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.weatherapp.data.database.CityWeather
+import com.example.weatherapp.data.network.City
 
 class GetCitiesUseCase(private val cityRepository: CityRepository) {
 
-    operator fun invoke(): LiveData<List<CityWeather>> {
-        return cityRepository.getCities()
+    suspend operator fun invoke(latitude: Double, longitude: Double): List<City> {
+        return cityRepository.getCities(latitude, longitude)
     }
 }

@@ -25,11 +25,12 @@ private val retrofit = Retrofit.Builder()
 interface WeatherApiService{
     @GET("find")
     suspend fun getCityList(
-        @Query("lat") latitude: Double = 56.488430,
-        @Query("lon") longitude: Double = 84.948047,
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
         @Query("appid") appId: String = API_KEY,
-        @Query("cnt") count: Int = 12
-        ): Cities
+        @Query("cnt") count: Int = 45,
+        @Query("units") units: String = "metric"
+    ): Cities
 }
 
 object WeatherApi {

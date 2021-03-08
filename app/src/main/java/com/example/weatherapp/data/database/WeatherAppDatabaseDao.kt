@@ -1,29 +1,25 @@
 package com.example.weatherapp.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface WeatherAppDatabaseDao {
     @Insert
-    suspend fun insert(cityWeather: CityWeather)
-
-    @Insert
-    suspend fun insert(citiesWeather: List<CityWeather>)
+    suspend fun insert(city: FavoriteCities)
 
     @Update
-    suspend fun update(cityWeather: CityWeather)
+    suspend fun update(city: FavoriteCities)
 
-    @Query("SELECT * FROM weather_in_city_table ORDER BY id")
-    fun getAllCities(): LiveData<List<CityWeather>>
+    @Delete
+    suspend fun delete(city: FavoriteCities)
 
-    @Query("SELECT * FROM weather_in_city_table WHERE id = :key")
-    suspend fun getCity(key: Long): CityWeather?
+    @Query("SELECT * FROM favorite_cities_table ORDER BY id")
+    fun getAllCities(): LiveData<List<FavoriteCities>>
 
-    @Query("DELETE FROM weather_in_city_table")
+    @Query("SELECT * FROM favorite_cities_table WHERE id = :key")
+    suspend fun getCity(key: Long): FavoriteCities?
+
+    @Query("DELETE FROM favorite_cities_table")
     fun clearAll()
 }
