@@ -8,6 +8,9 @@ import com.example.weatherapp.data.network.WeatherApi
 import com.example.weatherapp.domain.CityRepository
 
 class CityRepositoryImpl(val database: WeatherAppDatabaseDao): CityRepository {
+    override suspend fun setFavoriteCity(id: Long) {
+        database.insert()
+    }
 
     override suspend fun getCity(id: Long): FavoriteCities? = database.getCity(id)
 

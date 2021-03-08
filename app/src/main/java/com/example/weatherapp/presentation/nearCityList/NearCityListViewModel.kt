@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.data.WeatherAppLocationService
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.domain.GetCitiesUseCase
 import kotlinx.coroutines.launch

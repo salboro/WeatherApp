@@ -3,8 +3,8 @@ package com.example.weatherapp.presentation.nearCityList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.data.CityRepositoryImpl
-import com.example.weatherapp.data.WeatherAppLocationService
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.domain.GetCitiesUseCase
 
 class NearCityListViewModelFactory(

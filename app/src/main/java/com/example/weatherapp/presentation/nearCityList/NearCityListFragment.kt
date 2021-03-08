@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.weatherapp.data.WeatherAppLocationService
 import com.example.weatherapp.data.database.WeatherAppDatabase
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentListNearBinding
 import com.google.android.gms.location.FusedLocationProviderClient
