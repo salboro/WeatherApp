@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
+import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentDetailBinding
 
@@ -24,11 +26,20 @@ class DetailFragment : Fragment() {
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        viewModelFactory = DetailViewModelFactory(DetailFragmentArgs.fromBundle(requireArguments()).city)
+        val application = requireNotNull(this.activity).application
+        val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
+        viewModelFactory = DetailViewModelFactory(
+            dataSource,
+            DetailFragmentArgs.fromBundle(requireArguments()).city
+        )
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
         viewModel.city.observe(viewLifecycleOwner) { city ->
             setViewProperties(city)
         }
+
+        viewModel.isFavoriteCity.observe(viewLifecycleOwner, Observer {
+            setIsFavorite(it)
+        })
 
         return binding.root
     }
@@ -57,6 +68,17 @@ class DetailFragment : Fragment() {
                     "drawable", requireContext().packageName
                 )
             )
+            binding.isFavoriteImage.setOnClickListener {
+                viewModel.setFavoriteCityCondition()
+            }
+        }
+    }
+
+    private fun setIsFavorite(isFavoriteCity: Boolean) {
+        if (isFavoriteCity) {
+            binding.isFavoriteImage.setImageResource(R.drawable.ic_star_fill)
+        } else {
+            binding.isFavoriteImage.setImageResource(R.drawable.ic_star)
         }
     }
 }
