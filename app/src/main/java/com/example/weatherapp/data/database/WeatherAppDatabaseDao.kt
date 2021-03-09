@@ -14,7 +14,7 @@ interface WeatherAppDatabaseDao {
     suspend fun delete(city: FavoriteCities)
 
     @Query("SELECT * FROM favorite_cities_table ORDER BY id")
-    fun getFavoriteCities(): List<FavoriteCities>
+    suspend fun getFavoriteCities(): List<FavoriteCities>?
 
     @Query("SELECT * FROM favorite_cities_table WHERE id = :key")
     suspend fun getFavoriteCity(key: Long): FavoriteCities?

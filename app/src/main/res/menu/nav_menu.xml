@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/NearCityListFragment"
+        android:title="Near cities" />
+    <item
+        android:id="@+id/favoriteCityListFragment"
+        android:icon="@drawable/ic_star_fill"
+        android:title="Favorite cities" />
+
+</menu>

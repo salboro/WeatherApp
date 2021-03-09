@@ -11,7 +11,8 @@ import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.sqrt
 
-class CitiesAdapter(private val onClick: (City) -> Unit) : RecyclerView.Adapter<CityViewHolder>() {
+class NearCitiesAdapter(private val onClick: (City) -> Unit) :
+    RecyclerView.Adapter<CityViewHolder>() {
 
     var data: List<City> = emptyList()
         set(value) {

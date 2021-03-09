@@ -31,6 +31,13 @@ interface WeatherApiService{
         @Query("cnt") count: Int = 45,
         @Query("units") units: String = "metric"
     ): Cities
+
+    @GET("weather")
+    suspend fun getCity(
+        @Query("id") id: Long,
+        @Query("appid") appId: String = API_KEY,
+        @Query("units") units: String = "metric"
+    ): City
 }
 
 object WeatherApi {

@@ -1,52 +1,55 @@
-//package com.example.weatherapp.presentation.favoriteCityList
-//
-//import android.os.Bundle
-//import androidx.fragment.app.Fragment
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.lifecycle.ViewModelProvider
-//import androidx.navigation.fragment.findNavController
-//import com.example.weatherapp.data.database.WeatherAppDatabase
-//import com.example.weatherapp.data.network.City
-//import com.example.weatherapp.databinding.FragmentListNearBinding
-//import com.example.weatherapp.presentation.nearCityList.CitiesAdapter
-//import com.example.weatherapp.presentation.nearCityList.NearCityListViewModel
-//import com.example.weatherapp.presentation.nearCityList.NearCityListViewModelFactory
-//
-//class FavoriteCityListFragment : Fragment() {
-//
-//    private val REQUEST_LOCATION_PERMISSION = 1
-//
-//    private var isMyLocationEnable: Boolean = false
-//
-//    private lateinit var binding: FragmentListNearBinding
-//    private lateinit var viewModelNearCity: NearCityListViewModel
-//    private lateinit var viewModelFactory: NearCityListViewModelFactory
-//    private lateinit var adapter: CitiesAdapter
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        binding = FragmentListNearBinding.inflate(inflater, container, false)
-//        val application = requireNotNull(this.activity).application
-//        val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
-//        viewModelFactory = NearCityListViewModelFactory(dataSource)
-//        viewModelNearCity = ViewModelProvider(this, viewModelFactory).get(NearCityListViewModel::class.java)
-//        adapter = CitiesAdapter(::onCityClicked)
-//
-//
-//        return binding.root
-//    }
-//
-//
-//    private fun bindCitiesList(list: List<City>) {
-//        adapter.data = list
-//    }
-//
-//    private fun onCityClicked(city: City) {
-//        this.findNavController()
-//            .navigate(ListFragmentDirections.actionListFragmentToDetailFragment(city))
-//    }
-//}
+package com.example.weatherapp.presentation.favoriteCityList
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.weatherapp.data.database.WeatherAppDatabase
+import com.example.weatherapp.data.network.City
+import com.example.weatherapp.databinding.FragmentListFavoriteBinding
+
+class FavoriteCityListFragment : Fragment() {
+
+    private lateinit var binding: FragmentListFavoriteBinding
+    private lateinit var viewModel: FavoriteCityListViewModel
+    private lateinit var viewModelFactory: FavoriteCityListViewModelFactory
+    private lateinit var adapter: FavoriteCitiesAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentListFavoriteBinding.inflate(inflater, container, false)
+        val application = requireNotNull(this.activity).application
+        val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
+        viewModelFactory = FavoriteCityListViewModelFactory(dataSource)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(FavoriteCityListViewModel::class.java)
+        adapter = FavoriteCitiesAdapter(::onCityClicked)
+        binding.favoriteCitiesList.adapter = adapter
+
+        viewModel.cityList.observe(viewLifecycleOwner, Observer {
+            bindCitiesList(it)
+        })
+
+        return binding.root
+    }
+
+
+    private fun bindCitiesList(list: List<City>) {
+        adapter.data = list
+    }
+
+    private fun onCityClicked(city: City) {
+        this.findNavController()
+            .navigate(
+                FavoriteCityListFragmentDirections.actionFavoriteCityListFragmentToDetailFragment(
+                    city
+                )
+            )
+    }
+}

@@ -25,7 +25,7 @@ class NearCityListFragment : Fragment() {
     private lateinit var viewModelNearCity: NearCityListViewModel
     private lateinit var viewModelFactory: NearCityListViewModelFactory
     private lateinit var locationService: FusedLocationProviderClient
-    private lateinit var adapter: CitiesAdapter
+    private lateinit var adapter: NearCitiesAdapter
     private lateinit var weatherAppLocationService: WeatherAppLocationService
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class NearCityListFragment : Fragment() {
         viewModelFactory = NearCityListViewModelFactory(dataSource, weatherAppLocationService)
         viewModelNearCity =
             ViewModelProvider(this, viewModelFactory).get(NearCityListViewModel::class.java)
-        adapter = CitiesAdapter(::onCityClicked)
+        adapter = NearCitiesAdapter(::onCityClicked)
         binding.citiesList.adapter = adapter
 
         viewModelNearCity.setLocation()

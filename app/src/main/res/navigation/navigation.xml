@@ -12,16 +12,32 @@
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment"
-            app:enterAnim="@anim/slide_top_for_detali"
+            app:enterAnim="@anim/slide_top_for_detail"
             app:popEnterAnim="@anim/slide_top_for_list" />
+        <action
+            android:id="@+id/action_NearCityListFragment_to_favoriteCityListFragment"
+            app:destination="@id/favoriteCityListFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.weatherapp.presentation.detail.DetailFragment"
         android:label="Weather in city"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="city"
             app:argType="com.example.weatherapp.data.network.City" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteCityListFragment"
+        android:name="com.example.weatherapp.presentation.favoriteCityList.FavoriteCityListFragment"
+        android:label="Favorite cities">
+        <action
+            android:id="@+id/action_favoriteCityListFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_top_for_detail"
+            app:popEnterAnim="@anim/slide_top_for_list" />
+        <action
+            android:id="@+id/action_favoriteCityListFragment_to_NearCityListFragment"
+            app:destination="@id/NearCityListFragment" />
     </fragment>
 </navigation>

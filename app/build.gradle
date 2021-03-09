@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
-    id 'koin'
 }
 
 android {
@@ -53,15 +52,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
     implementation "androidx.multidex:multidex:2.0.1"
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    // Koin AndroidX Scope features
-    implementation "org.koin:koin-androidx-scope:$koin_version"
-    // Koin AndroidX ViewModel features
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    // Koin AndroidX Fragment features
-    implementation "org.koin:koin-androidx-fragment:$koin_version"
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -77,7 +70,7 @@ dependencies {
 
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
-    implementation "com.github.bumptech.glide:glide:$version_glide"
+    implementation "com.github.bumptech.glide:glide:4.12.0"
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"

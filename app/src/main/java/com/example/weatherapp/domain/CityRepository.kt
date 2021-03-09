@@ -11,7 +11,9 @@ interface CityRepository {
 
     suspend fun setFavoriteCity(id: Long)
 
-    suspend fun getFavoriteCities(id: Long): List<FavoriteCities>
+    suspend fun getFavoriteCities(list: List<FavoriteCities>): List<City>
+
+    suspend fun getFavoriteCitiesFromDB(): List<FavoriteCities>?
 
     suspend fun getCities(latitude: Double, longitude: Double): List<City>
 }
