@@ -25,7 +25,7 @@ class CityRepositoryImpl(val database: WeatherAppDatabaseDao) : CityRepository {
         val favoriteCitiesToReturn = mutableListOf<City>()
         try {
             for (city in list) {
-                Log.i(" cities", city.id.toString())
+
                 favoriteCitiesToReturn.add(WeatherApi.retrofitService.getCity(id = city.id))
             }
         } catch (e: Exception) {

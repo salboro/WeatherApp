@@ -40,7 +40,9 @@
         android:layout_width="144dp"
         android:layout_height="74dp"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/find_string"
         android:textAlignment="center"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textSize="24sp" />
 </LinearLayout>

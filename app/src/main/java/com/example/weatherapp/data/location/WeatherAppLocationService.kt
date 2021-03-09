@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -40,11 +39,9 @@ class WeatherAppLocationService(
             if (isLocationEnable()) {
                 locationService.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
-                        Log.i("locate", location.latitude.toString())
                         setLocation(location)
                         requestNewLocation(setLocation)
                     } else {
-                        Log.i("locate", "1")
                         requestNewLocation(setLocation)
                     }
                 }
@@ -65,8 +62,6 @@ class WeatherAppLocationService(
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             numUpdates = 1
         }
-
-        Log.i("locate", "2")
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
