@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/NearCityListFragment"
-        android:title="@string/near_cities_label"
-        android:icon="@drawable/location_icon" />
-    <item
-        android:id="@+id/favoriteCityListFragment"
-        android:icon="@drawable/ic_star_fill"
-        android:title="@string/favorite_cities_label" />
-    <item
-        android:id="@+id/searchCityFragment"
-        android:icon="@drawable/find_icon"
-        android:title="@string/search_city_label" />
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navMenu">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/NearCityListFragment"
+            android:title="@string/near_cities_label"
+            android:icon="@drawable/ic_location" />
+        <item
+            android:id="@+id/favoriteCityListFragment"
+            android:icon="@drawable/ic_favorite_star"
+            android:title="@string/favorite_cities_label" />
+        <item
+            android:id="@+id/searchCityFragment"
+            android:icon="@drawable/ic_search"
+            android:title="@string/search_city_label" />
+    </group>
 </menu>
