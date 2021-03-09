@@ -33,4 +33,8 @@ class FavoriteCityListViewModel(
             }
         }
     }
+
+    fun refreshCities() {
+        getCities()
+    }
 }

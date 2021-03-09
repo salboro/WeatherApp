@@ -52,4 +52,9 @@ class FavoriteCityListFragment : Fragment() {
                 )
             )
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshCities()
+    }
 }
