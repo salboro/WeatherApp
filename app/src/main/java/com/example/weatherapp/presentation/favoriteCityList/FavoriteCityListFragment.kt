@@ -24,6 +24,7 @@ class FavoriteCityListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListFavoriteBinding.inflate(inflater, container, false)
+        binding.progressBar.visibility = View.VISIBLE
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
         viewModelFactory = FavoriteCityListViewModelFactory(dataSource)
@@ -41,6 +42,7 @@ class FavoriteCityListFragment : Fragment() {
 
 
     private fun bindCitiesList(list: List<City>) {
+        binding.progressBar.visibility = View.GONE
         adapter.data = list
     }
 

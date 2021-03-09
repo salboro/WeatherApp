@@ -34,6 +34,7 @@ class NearCityListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListNearBinding.inflate(inflater, container, false)
+        binding.progressBar.visibility = View.VISIBLE
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
         locationService = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -70,6 +71,7 @@ class NearCityListFragment : Fragment() {
     }
 
     private fun bindCitiesList(list: List<City>) {
+        binding.progressBar.visibility = View.GONE
         adapter.data = list
         adapter.location = viewModelNearCity.location.value
     }
