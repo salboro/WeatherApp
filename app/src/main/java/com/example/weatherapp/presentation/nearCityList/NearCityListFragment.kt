@@ -42,6 +42,7 @@ class NearCityListFragment : Fragment() {
         viewModelFactory = NearCityListViewModelFactory(dataSource, weatherAppLocationService)
         viewModelNearCity =
             ViewModelProvider(this, viewModelFactory).get(NearCityListViewModel::class.java)
+
         adapter = NearCitiesAdapter(::onCityClicked)
         binding.citiesList.adapter = adapter
 
@@ -63,7 +64,7 @@ class NearCityListFragment : Fragment() {
     private fun refreshApp() {
         binding.swipeRefresh.setOnRefreshListener {
             viewModelNearCity.setLocation()
-                binding.swipeRefresh.isRefreshing = false
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 

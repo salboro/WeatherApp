@@ -3,10 +3,15 @@
 
     <item
         android:id="@+id/NearCityListFragment"
-        android:title="Near cities" />
+        android:title="@string/near_cities_label"
+        android:icon="@drawable/location_icon" />
     <item
         android:id="@+id/favoriteCityListFragment"
         android:icon="@drawable/ic_star_fill"
-        android:title="Favorite cities" />
+        android:title="@string/favorite_cities_label" />
+    <item
+        android:id="@+id/searchCityFragment"
+        android:icon="@drawable/find_icon"
+        android:title="@string/search_city_label" />
 
 </menu>

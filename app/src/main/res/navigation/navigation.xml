@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_NearCityListFragment_to_favoriteCityListFragment"
             app:destination="@id/favoriteCityListFragment" />
+        <action
+            android:id="@+id/action_NearCityListFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -39,5 +42,24 @@
         <action
             android:id="@+id/action_favoriteCityListFragment_to_NearCityListFragment"
             app:destination="@id/NearCityListFragment" />
+        <action
+            android:id="@+id/action_favoriteCityListFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchCityFragment"
+        android:name="com.example.weatherapp.presentation.searchCity.SearchCityFragment"
+        android:label="SearchCityFragment">
+        <action
+            android:id="@+id/action_searchCityFragment_to_NearCityListFragment2"
+            app:destination="@id/NearCityListFragment" />
+        <action
+            android:id="@+id/action_searchCityFragment_to_favoriteCityListFragment"
+            app:destination="@id/favoriteCityListFragment" />
+        <action
+            android:id="@+id/action_searchCityFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/searchCityFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

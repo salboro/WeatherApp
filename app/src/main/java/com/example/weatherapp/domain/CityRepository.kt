@@ -16,4 +16,6 @@ interface CityRepository {
     suspend fun getFavoriteCitiesFromDB(): List<FavoriteCities>?
 
     suspend fun getCities(latitude: Double, longitude: Double): List<City>
+
+    suspend fun getCityByName(cityName: String): City?
 }

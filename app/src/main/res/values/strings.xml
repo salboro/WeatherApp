@@ -6,4 +6,10 @@
     <string name="pressure_format">Pressure is %1$d</string>
     <string name="condition_and_sediment_format">Weather is %1$s, sediment is %2$d mm</string>
     <string name="destination_format">%1$.1f kilometers from you</string>
+    <string name="enter_city">Enter city here</string>
+    <string name="find_city_label">Find city</string>
+    <string name="find_string">Find</string>
+    <string name="near_cities_label">Near cities</string>
+    <string name="favorite_cities_label">Favorite cities</string>
+    <string name="search_city_label">Search city</string>
 </resources>

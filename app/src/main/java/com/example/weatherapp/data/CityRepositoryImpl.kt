@@ -7,7 +7,7 @@ import com.example.weatherapp.data.network.City
 import com.example.weatherapp.data.network.WeatherApi
 import com.example.weatherapp.domain.CityRepository
 
-class CityRepositoryImpl(val database: WeatherAppDatabaseDao): CityRepository {
+class CityRepositoryImpl(val database: WeatherAppDatabaseDao) : CityRepository {
     override suspend fun deleteFavoriteCity(id: Long) {
         database.delete(FavoriteCities(id))
     }
@@ -44,4 +44,14 @@ class CityRepositoryImpl(val database: WeatherAppDatabaseDao): CityRepository {
         }
         return list
     }
+
+    override suspend fun getCityByName(cityName: String): City? {
+        return try {
+            WeatherApi.retrofitService.getCityByName(name = cityName)
+        } catch (e: Exception) {
+            Log.i("Error in getting cities", e.toString())
+            null
+        }
+    }
+
 }
