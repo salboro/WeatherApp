@@ -1,7 +1,6 @@
 package com.example.weatherapp.data
 
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp.data.database.FavoriteCities
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
@@ -14,6 +13,7 @@ class CityRepositoryImpl(
     val database: WeatherAppDatabaseDao,
     private val locationService: WeatherAppLocationService
 ) : CityRepository {
+
     override suspend fun deleteFavoriteCity(id: Long) {
         database.delete(FavoriteCities(id))
     }
@@ -35,7 +35,7 @@ class CityRepositoryImpl(
                 favoriteCitiesToReturn.add(WeatherApi.retrofitService.getCity(id = city.id))
             }
         } catch (e: Exception) {
-            Log.i("Error in getting cities", e.toString())
+//            Log.i("Error in getting cities", e.toString())
             return ArrayList()
         }
         return favoriteCitiesToReturn.toList()
@@ -45,7 +45,7 @@ class CityRepositoryImpl(
         val list = try {
             WeatherApi.retrofitService.getCityList(latitude = latitude, longitude = longitude).list
         } catch (e: Exception) {
-            Log.i("Error in getting cities", e.toString())
+//            Log.i("Error in getting cities", e.toString())
             ArrayList()
         }
         return list
@@ -55,7 +55,7 @@ class CityRepositoryImpl(
         return try {
             WeatherApi.retrofitService.getCityByName(name = cityName)
         } catch (e: Exception) {
-            Log.i("Error in getting cities", e.toString())
+//            Log.i("Error in getting cities", e.toString())
             null
         }
     }
