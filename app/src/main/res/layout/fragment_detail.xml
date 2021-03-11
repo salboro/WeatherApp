@@ -17,8 +17,9 @@
 
         <ImageView
             android:id="@+id/weatherImage"
-            android:layout_width="456dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.511"
@@ -101,7 +102,7 @@
             android:paddingStart="16dp"
             android:paddingTop="16dp"
             android:paddingEnd="16dp"
-            android:paddingBottom="16dp">
+            android:paddingBottom="24dp">
 
             <ImageView
                 android:id="@+id/weatherIcon"

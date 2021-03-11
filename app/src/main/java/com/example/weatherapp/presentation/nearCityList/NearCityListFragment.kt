@@ -58,16 +58,16 @@ class NearCityListFragment : Fragment() {
             bindCitiesList(cities)
         })
 
-        refreshApp()
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModelNearCity.setLocation()
+            binding.swipeRefresh.isRefreshing = false
+        }
 
         return binding.root
     }
 
     private fun refreshApp() {
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModelNearCity.setLocation()
-            binding.swipeRefresh.isRefreshing = false
-        }
+
     }
 
     private fun bindCitiesList(list: List<City>) {
