@@ -17,28 +17,67 @@
         app:layout_constraintVertical_bias="0.039">
 
         <ImageView
+            android:id="@+id/weatherImage"
+            android:layout_width="456dp"
+            android:layout_height="192dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mist" />
+
+        <ImageView
             android:id="@+id/isFavoriteImage"
-            android:layout_width="53dp"
-            android:layout_height="52dp"
+            android:layout_width="34dp"
+            android:layout_height="37dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_star" />
 
-        <ImageView
-            android:id="@+id/conditionImage"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/cityInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="64dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textAlignment="center"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@mipmap/ic_only_cloud_icon_foreground" />
+            tools:text="Tomsk RU" />
+
+        <TextView
+            android:id="@+id/temperatureText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textAlignment="center"
+            android:textColor="@color/secondary_text_color"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityInfoText"
+            tools:text="-5°" />
+
+        <TextView
+            android:id="@+id/realFeelTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="21dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/secondary_text_color"
+            app:layout_constraintBottom_toBottomOf="@id/temperatureText"
+            app:layout_constraintStart_toEndOf="@+id/temperatureText"
+            tools:text="feels like -6°" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,82 +102,91 @@
             android:paddingEnd="16dp"
             android:paddingBottom="42dp">
 
-            <TextView
-                android:id="@+id/pressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="@{@string/pressure_format(city.weather.pressure)}"
-                android:textColor="@color/primary_text_color"
-                android:textSize="24sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/degrees"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/degrees"
-                tools:text="756" />
-
-            <TextView
-                android:id="@+id/cityAndCountryNameText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textAlignment="textStart"
-                android:textColor="@color/primary_text_color"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
+            <ImageView
+                android:id="@+id/weatherIcon"
+                android:layout_width="81dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Tomsk   RU" />
-
-            <View
-                android:id="@+id/separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginBottom="116dp"
-                android:background="@color/gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cityAndCountryNameText"
-                tools:layout_editor_absoluteX="16dp" />
+                app:srcCompat="@drawable/ic_01d" />
 
             <TextView
-                android:id="@+id/degrees"
+                android:id="@+id/weatherDescriptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/primary_text_color"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/condition"
-                app:layout_constraintEnd_toStartOf="@+id/pressure"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cityAndCountryNameText"
-                tools:text="-25" />
-
-            <TextView
-                android:id="@+id/condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
-                android:textColor="@color/primary_text_color"
+                android:textColor="@color/secondary_text_color"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pressure"
-                tools:text="sunny" />
+                app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="few clouds" />
 
+            <TextView
+                android:id="@+id/sidenmentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+                app:layout_constraintTop_toBottomOf="@+id/weatherDescriptionText"
+                tools:text="null sidenment" />
+
+            <TextView
+                android:id="@+id/windSpeedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+                tools:text="wind speed 9 m/s" />
+
+            <TextView
+                android:id="@+id/cloudinessText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/windSpeedText"
+                tools:text="cloudiness 57%" />
+
+            <TextView
+                android:id="@+id/pressureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cloudinessText"
+                tools:text="pressure 652 mm" />
+
+            <TextView
+                android:id="@+id/humidityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/secondary_text_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pressureText"
+                tools:text="humidity 52%" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

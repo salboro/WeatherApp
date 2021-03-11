@@ -2,8 +2,14 @@
     <string name="app_name">WeatherApp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="city_and_country_name_format">%1$s    %2$s</string>
-    <string name="decrees_format">%1$d</string>
-    <string name="pressure_format">Pressure is %1$d</string>
+    <string name="decrees_format">%1$d°</string>
+    <string name="pressure_format">pressure  %1$d</string>
+    <string name="wind_speed_format">wind speed %1$d m/s </string>
+    <string name="real_feels_format">feels like %1$d°</string>
+    <string name="cloudiness_format">cloudiness %1$d </string>
+    <string name="rain_format">rain %1$.1f mm</string>
+    <string name="snow_format">snow %1$.1f mm</string>
+    <string name="null_precipitation">null precipitation</string>
     <string name="condition_and_sediment_format">Weather is %1$s, sediment is %2$d mm</string>
     <string name="destination_format">%1$.1f kilometers from you</string>
     <string name="enter_city">Enter city here</string>

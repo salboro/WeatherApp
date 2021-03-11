@@ -1,11 +1,14 @@
 package com.example.weatherapp.presentation.searchCity
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +24,7 @@ class SearchCityFragment : Fragment() {
     private lateinit var binding: FragmentSearchCityBinding
     private lateinit var viewModel: SearchCityFragmentViewModel
     private lateinit var viewModelFactory: SearchCityFragmentViewModelFactory
+    private var clickCounter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +57,23 @@ class SearchCityFragment : Fragment() {
             }
         }
 
+        binding.imageView.setOnClickListener {
+            sunRotate()
+        }
+
         return binding.root
+    }
+
+    private fun sunRotate() {
+        if (clickCounter == 10) {
+            val animator = ObjectAnimator.ofFloat(binding.imageView, View.ROTATION, 360f, 0f)
+            animator.duration = 10000
+            animator.repeatCount = Animation.INFINITE
+            animator.interpolator = LinearInterpolator()
+            animator.start()
+        } else {
+            clickCounter++
+        }
     }
 
     private fun getCityByName() {
@@ -65,6 +85,11 @@ class SearchCityFragment : Fragment() {
     private fun onCityClicked(city: City) {
         this.findNavController()
             .navigate(SearchCityFragmentDirections.actionSearchCityFragmentToDetailFragment(city))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        clickCounter = 0
     }
 
     private fun View.closeKeyboard() {

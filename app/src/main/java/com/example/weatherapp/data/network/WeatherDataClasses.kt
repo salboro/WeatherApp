@@ -18,6 +18,7 @@ data class City(
     @Json(name = "coord") val coordinate: Coordinate,
     val main: Main,
     val wind: Wind,
+    val clouds: Cloud,
     @Json(name = "sys") val country: Country,
     val rain: Rain?,
     val snow: Snow?,
@@ -50,19 +51,25 @@ data class Wind(
 @JsonClass(generateAdapter = true)
 data class Country(
     @Json(name = "country") val name: String
-): Parcelable
+) : Parcelable
 
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Rain(
-    @Json(name="1h") val forOneHour: Double
-): Parcelable
+    @Json(name = "1h") val forOneHour: Double
+) : Parcelable
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Cloud(
+    @Json(name = "all") val cloudiness: Int
+) : Parcelable
 
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Snow(
-    @Json(name="1h") val forOneHour: Double
-): Parcelable
+    @Json(name = "1h") val forOneHour: Double
+) : Parcelable
 
 @Parcelize
 @JsonClass(generateAdapter = true)
