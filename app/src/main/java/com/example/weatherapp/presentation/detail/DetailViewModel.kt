@@ -43,7 +43,6 @@ class DetailViewModel(
                 deleteFavoriteCityUseCase(viewCity.id)
                 _isFavoriteCity.value = false
             }
-
         }
     }
 }

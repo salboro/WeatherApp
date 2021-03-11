@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.data.CityRepositoryImpl
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.domain.DeleteFavoriteCityUseCase
 import com.example.weatherapp.domain.GetFavoriteCityUseCase
@@ -11,12 +12,13 @@ import com.example.weatherapp.domain.SetFavoriteCityUseCase
 
 class DetailViewModelFactory(
     private val dataSource: WeatherAppDatabaseDao,
-    private val city: City
+    private val city: City,
+    private val weatherLocationServices: WeatherAppLocationService
 ): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            val cityRepository = CityRepositoryImpl(dataSource)
+            val cityRepository = CityRepositoryImpl(dataSource, weatherLocationServices)
             val getFavoriteCityUseCase = GetFavoriteCityUseCase(cityRepository)
             val setFavoriteCityUseCase = SetFavoriteCityUseCase(cityRepository)
             val deleteFavoriteCityUseCase = DeleteFavoriteCityUseCase(cityRepository)

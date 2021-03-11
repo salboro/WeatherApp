@@ -1,6 +1,5 @@
 package com.example.weatherapp.presentation.favoriteCityList
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +27,6 @@ class FavoriteCityListViewModel(
         viewModelScope.launch {
             val citiesList = getFavoriteCitiesFromDBUseCase()
             if (citiesList != null) {
-                Log.i("here", "again")
                 _cityList.value = getFavoriteCitiesUseCase(citiesList)
             }
         }

@@ -1,12 +1,14 @@
 package com.example.weatherapp.data.location
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -30,20 +32,29 @@ class WeatherAppLocationService(
 
     private lateinit var locationCallback: LocationCallback
 
+    @SuppressLint("VisibleForTests")
     private var locationService: FusedLocationProviderClient = FusedLocationProviderClient(context)
 
 
     fun getLastLocation(setLocation: (location: Location?) -> Unit) {
         checkPermission()
+
         if (isPermissionChecked) {
             if (isLocationEnable()) {
                 locationService.lastLocation.addOnSuccessListener { location ->
+                    Log.i("asfa", "1")
                     if (location != null) {
                         setLocation(location)
                         requestNewLocation(setLocation)
                     } else {
                         requestNewLocation(setLocation)
                     }
+                }.addOnCanceledListener {
+                    Log.i("asfa", "2")
+                }.addOnFailureListener {
+                    Log.i("asfa", "3")
+                }.addOnCompleteListener {
+                    Log.i("asfa", "4")
                 }
             } else {
                 Toast.makeText(

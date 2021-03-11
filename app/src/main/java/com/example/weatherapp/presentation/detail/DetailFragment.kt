@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.data.database.WeatherAppDatabase
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentDetailBinding
 import java.util.*
@@ -19,6 +20,7 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private lateinit var viewModelFactory: DetailViewModelFactory
     private lateinit var viewModel: DetailViewModel
+    private lateinit var weatherAppLocationService: WeatherAppLocationService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +29,14 @@ class DetailFragment : Fragment() {
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
+        weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
+
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
         viewModelFactory = DetailViewModelFactory(
             dataSource,
-            DetailFragmentArgs.fromBundle(requireArguments()).city
+            DetailFragmentArgs.fromBundle(requireArguments()).city,
+            weatherAppLocationService
         )
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
         viewModel.city.observe(viewLifecycleOwner) { city ->

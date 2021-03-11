@@ -66,9 +66,6 @@ class NearCityListFragment : Fragment() {
         return binding.root
     }
 
-    private fun refreshApp() {
-
-    }
 
     private fun bindCitiesList(list: List<City>) {
         binding.progressBar.visibility = View.GONE

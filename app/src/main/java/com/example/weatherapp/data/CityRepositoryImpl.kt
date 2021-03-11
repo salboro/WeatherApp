@@ -1,13 +1,19 @@
 package com.example.weatherapp.data
 
+import android.location.Location
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp.data.database.FavoriteCities
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.data.network.WeatherApi
 import com.example.weatherapp.domain.CityRepository
 
-class CityRepositoryImpl(val database: WeatherAppDatabaseDao) : CityRepository {
+class CityRepositoryImpl(
+    val database: WeatherAppDatabaseDao,
+    private val locationService: WeatherAppLocationService
+) : CityRepository {
     override suspend fun deleteFavoriteCity(id: Long) {
         database.delete(FavoriteCities(id))
     }
@@ -51,6 +57,12 @@ class CityRepositoryImpl(val database: WeatherAppDatabaseDao) : CityRepository {
         } catch (e: Exception) {
             Log.i("Error in getting cities", e.toString())
             null
+        }
+    }
+
+    override fun getLocation(location: MutableLiveData<Location?>) {
+        locationService.getLastLocation {
+            location.value = it
         }
     }
 

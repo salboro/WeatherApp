@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.data.database.WeatherAppDatabase
+import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentSearchCityBinding
 
@@ -24,6 +25,7 @@ class SearchCityFragment : Fragment() {
     private lateinit var binding: FragmentSearchCityBinding
     private lateinit var viewModel: SearchCityFragmentViewModel
     private lateinit var viewModelFactory: SearchCityFragmentViewModelFactory
+    private lateinit var weatherAppLocationService: WeatherAppLocationService
     private var clickCounter = 0
 
     override fun onCreateView(
@@ -32,9 +34,16 @@ class SearchCityFragment : Fragment() {
     ): View? {
         binding = FragmentSearchCityBinding.inflate(inflater, container, false)
 
+        weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
+
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
-        viewModelFactory = SearchCityFragmentViewModelFactory(dataSource, requireContext())
+
+        viewModelFactory = SearchCityFragmentViewModelFactory(
+            dataSource,
+            requireContext(),
+            weatherAppLocationService
+        )
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SearchCityFragmentViewModel::class.java)
 
