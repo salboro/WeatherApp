@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_color"
-    android:orientation="vertical">
+    android:background="@color/primary_color">
 
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="198dp"
-        app:srcCompat="@mipmap/ic_launcher_foreground" />
+        android:layout_height="match_parent"
+        android:background="@color/primary_color"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/find_city_label"
-        android:textAlignment="center"
-        android:textColor="@color/primary_text_color"
-        android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/editTextCityName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/enter_city"
-        android:inputType="text"
-        android:textSize="24sp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="198dp"
+            app:srcCompat="@mipmap/ic_launcher_foreground" />
 
-    <Button
-        android:id="@+id/findButton"
-        android:layout_width="138dp"
-        android:layout_height="66dp"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/find_string"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="24sp" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/find_city_label"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/editTextCityName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/enter_city"
+            android:inputType="text"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/findButton"
+            android:layout_width="138dp"
+            android:layout_height="66dp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/find_string"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="24sp" />
+    </LinearLayout>
+</ScrollView>
