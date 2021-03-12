@@ -3,13 +3,13 @@
     android:id="@+id/navMenu">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/NearCityListFragment"
-            android:title="@string/near_cities_label"
+            android:id="@+id/navigation"
+            android:title="@string/near_city_list"
             android:icon="@drawable/ic_location" />
         <item
             android:id="@+id/favoriteCityListFragment"
             android:icon="@drawable/ic_favorite_star"
-            android:title="@string/favorite_cities_label" />
+            android:title="@string/favorite_city_list" />
         <item
             android:id="@+id/searchCityFragment"
             android:icon="@drawable/ic_search"

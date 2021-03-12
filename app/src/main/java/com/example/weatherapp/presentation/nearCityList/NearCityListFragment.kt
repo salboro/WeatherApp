@@ -5,17 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.weatherapp.R
 import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentListNearBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NearCityListFragment : Fragment() {
 
@@ -34,6 +35,10 @@ class NearCityListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListNearBinding.inflate(inflater, container, false)
+
+        this.activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility =
+            View.VISIBLE
+
         binding.progressBar.visibility = View.VISIBLE
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
@@ -88,10 +93,5 @@ class NearCityListFragment : Fragment() {
                 weatherAppLocationService.enablePermission()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Toast.makeText(context, "Try swipe right", Toast.LENGTH_SHORT).show()
     }
 }

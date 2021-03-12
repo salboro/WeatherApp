@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.weatherapp.R
-import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_main.view.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,13 +19,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val appBarConfiguration = AppBarConfiguration
+            .Builder(
+                R.id.NearCityListFragment,
+                R.id.favoriteCityListFragment,
+                R.id.searchCityFragment
+            )
+            .build()
         val navController = this.findNavController(R.id.myNavHostFragment)
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+
+        val bottomNavigationBar = findViewById<BottomNavigationView>(R.id.bottom_nav)
         NavigationUI.setupWithNavController(
-            findViewById<NavigationView>(R.id.navigationView).navigationView,
+            bottomNavigationBar,
             navController
         )
+
+
+
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 

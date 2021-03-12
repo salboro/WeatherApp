@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.weatherapp.R
 import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentListFavoriteBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FavoriteCityListFragment : Fragment() {
 
@@ -26,6 +28,9 @@ class FavoriteCityListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListFavoriteBinding.inflate(inflater, container, false)
+
+        this.activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility =
+            View.VISIBLE
 
         weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
 

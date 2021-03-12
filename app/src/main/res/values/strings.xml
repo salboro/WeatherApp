@@ -15,7 +15,7 @@
     <string name="enter_city">Enter city here</string>
     <string name="find_city_label">Find city</string>
     <string name="find_string">Find</string>
-    <string name="near_cities_label">Near cities</string>
-    <string name="favorite_cities_label">Favorite cities</string>
+    <string name="near_city_list">Near cities</string>
+    <string name="favorite_city_list">Favorite cities</string>
     <string name="search_city_label">Search city</string>
 </resources>

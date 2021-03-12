@@ -12,6 +12,7 @@ import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentDetailBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 
@@ -28,6 +29,8 @@ class DetailFragment : Fragment() {
     ): View? {
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        this.activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility = View.GONE
 
         weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
 
