@@ -1,22 +1,24 @@
 package com.example.weatherapp.domain
 
+import android.location.Location
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp.CoroutineTestRule
 import com.example.weatherapp.data.database.FavoriteCity
-import io.mockk.coEvery
-import io.mockk.mockk
-import junit.framework.Assert.assertEquals
+import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class GetFavoriteCityUseCaseTest {
+class SetFavoriteCityUseCaseTest {
     private val cityRepository: CityRepository = mockk()
     private val city: FavoriteCity = mockk()
+    private val location = MutableLiveData<Location?>()
+    private val id: Long = 1
 
-    private val getFavoriteCityUseCase = GetFavoriteCityUseCase(cityRepository)
+    private val setFavoriteCityUseCase = SetFavoriteCityUseCase(cityRepository)
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -26,12 +28,11 @@ class GetFavoriteCityUseCaseTest {
     val coroutineTestRule = CoroutineTestRule()
 
     @Test
-    fun `get favorite city EXPECT favorite city`() = runBlocking {
-        coEvery { cityRepository.getFavoriteCity(1) } returns city
+    fun `set favorite city EXPECT set favorite city`() = runBlocking {
+        coEvery { cityRepository.setFavoriteCity(id) } just runs
 
-        val city2 = getFavoriteCityUseCase(1)
+        setFavoriteCityUseCase(id)
 
-        assertEquals(city, city2)
+        coVerify { cityRepository.setFavoriteCity(id) }
     }
-
 }

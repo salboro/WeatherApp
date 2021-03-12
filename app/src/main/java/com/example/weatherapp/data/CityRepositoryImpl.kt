@@ -2,7 +2,7 @@ package com.example.weatherapp.data
 
 import android.location.Location
 import androidx.lifecycle.MutableLiveData
-import com.example.weatherapp.data.database.FavoriteCities
+import com.example.weatherapp.data.database.FavoriteCity
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
@@ -15,19 +15,19 @@ class CityRepositoryImpl(
 ) : CityRepository {
 
     override suspend fun deleteFavoriteCity(id: Long) {
-        database.delete(FavoriteCities(id))
+        database.delete(FavoriteCity(id))
     }
 
-    override suspend fun getFavoriteCity(id: Long): FavoriteCities? = database.getFavoriteCity(id)
+    override suspend fun getFavoriteCity(id: Long): FavoriteCity? = database.getFavoriteCity(id)
 
     override suspend fun setFavoriteCity(id: Long) {
-        database.insert(FavoriteCities(id))
+        database.insert(FavoriteCity(id))
     }
 
-    override suspend fun getFavoriteCitiesFromDB(): List<FavoriteCities>? =
+    override suspend fun getFavoriteCitiesFromDB(): List<FavoriteCity>? =
         database.getFavoriteCities()
 
-    override suspend fun getFavoriteCities(list: List<FavoriteCities>): List<City> {
+    override suspend fun getFavoriteCities(list: List<FavoriteCity>): List<City> {
         val favoriteCitiesToReturn = mutableListOf<City>()
         try {
             for (city in list) {

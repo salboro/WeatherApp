@@ -5,19 +5,19 @@ import androidx.room.*
 @Dao
 interface WeatherAppDatabaseDao {
     @Insert
-    suspend fun insert(city: FavoriteCities)
+    suspend fun insert(city: FavoriteCity)
 
     @Update
-    suspend fun update(city: FavoriteCities)
+    suspend fun update(city: FavoriteCity)
 
     @Delete
-    suspend fun delete(city: FavoriteCities)
+    suspend fun delete(city: FavoriteCity)
 
     @Query("SELECT * FROM favorite_cities_table ORDER BY id")
-    suspend fun getFavoriteCities(): List<FavoriteCities>?
+    suspend fun getFavoriteCities(): List<FavoriteCity>?
 
     @Query("SELECT * FROM favorite_cities_table WHERE id = :key")
-    suspend fun getFavoriteCity(key: Long): FavoriteCities?
+    suspend fun getFavoriteCity(key: Long): FavoriteCity?
 
     @Query("DELETE FROM favorite_cities_table")
     fun clearAll()

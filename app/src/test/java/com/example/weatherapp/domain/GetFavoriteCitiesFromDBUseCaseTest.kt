@@ -12,11 +12,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class GetFavoriteCityUseCaseTest {
+class GetFavoriteCitiesFromDBUseCaseTest {
     private val cityRepository: CityRepository = mockk()
     private val city: FavoriteCity = mockk()
 
-    private val getFavoriteCityUseCase = GetFavoriteCityUseCase(cityRepository)
+    private val getFavoriteCitiesFromDBUseCase = GetFavoriteCitiesFromDBUseCase(cityRepository)
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -26,12 +26,11 @@ class GetFavoriteCityUseCaseTest {
     val coroutineTestRule = CoroutineTestRule()
 
     @Test
-    fun `get favorite city EXPECT favorite city`() = runBlocking {
-        coEvery { cityRepository.getFavoriteCity(1) } returns city
+    fun `get favorite cities EXPECT list of favorite cities`() = runBlocking {
+        coEvery { cityRepository.getFavoriteCitiesFromDB() } returns listOf(city)
 
-        val city2 = getFavoriteCityUseCase(1)
+        val cities = getFavoriteCitiesFromDBUseCase()
 
-        assertEquals(city, city2)
+        assertEquals(listOf(city), cities)
     }
-
 }

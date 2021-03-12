@@ -2,7 +2,7 @@ package com.example.weatherapp.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weatherapp.CoroutineTestRule
-import com.example.weatherapp.data.database.FavoriteCities
+import com.example.weatherapp.data.database.FavoriteCity
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.domain.GetFavoriteCitiesFromDBUseCase
 import com.example.weatherapp.domain.GetFavoriteCitiesUseCase
@@ -24,8 +24,8 @@ class FavoriteCityListViewModelTest {
 
     private val city: City = mockk()
     private val cities = listOf(city)
-    private val favoriteCities: FavoriteCities = mockk()
-    private val favoriteCitiesList = listOf(favoriteCities)
+    private val favoriteCity: FavoriteCity = mockk()
+    private val favoriteCitiesList = listOf(favoriteCity)
 
 
     @get:Rule
