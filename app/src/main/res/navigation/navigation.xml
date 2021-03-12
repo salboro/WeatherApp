@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/searchCityFragment"
         android:name="com.example.weatherapp.presentation.searchCity.SearchCityFragment"
-        android:label="SearchCityFragment">
+        android:label="Search city">
         <action
             android:id="@+id/action_searchCityFragment_to_NearCityListFragment2"
             app:destination="@id/NearCityListFragment" />
