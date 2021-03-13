@@ -78,4 +78,17 @@ data class Weather(
     val main: String,
     val description: String,
     val icon: String
-): Parcelable
+) : Parcelable
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Items(
+    val items: List<Item>
+) : Parcelable
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Item(
+    val link: String
+) : Parcelable
+

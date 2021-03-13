@@ -110,7 +110,12 @@ class SearchCityFragment : Fragment() {
 
     private fun onCityClicked(city: City) {
         this.findNavController()
-            .navigate(SearchCityFragmentDirections.actionSearchCityFragmentToDetailFragment(city))
+            .navigate(
+                SearchCityFragmentDirections.actionSearchCityFragmentToDetailFragment(
+                    city,
+                    false
+                )
+            )
     }
 
     override fun onResume() {

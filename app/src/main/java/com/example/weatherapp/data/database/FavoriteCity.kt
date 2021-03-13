@@ -6,5 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favorite_cities_table")
 data class FavoriteCity(
     @PrimaryKey()
-    val id: Long
+    val id: Long,
+
+    val lang: String = "EN"
 )

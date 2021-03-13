@@ -29,6 +29,9 @@
         <argument
             android:name="city"
             app:argType="com.example.weatherapp.data.network.City" />
+        <argument
+            android:name="fromFavoriteListFlag"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/favoriteCityListFragment"

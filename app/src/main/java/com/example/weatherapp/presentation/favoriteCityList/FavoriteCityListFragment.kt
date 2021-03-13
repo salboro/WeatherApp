@@ -60,7 +60,8 @@ class FavoriteCityListFragment : Fragment() {
         this.findNavController()
             .navigate(
                 FavoriteCityListFragmentDirections.actionFavoriteCityListFragmentToDetailFragment(
-                    city
+                    city,
+                    true
                 )
             )
     }

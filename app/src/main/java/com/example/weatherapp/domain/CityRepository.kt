@@ -11,7 +11,7 @@ interface CityRepository {
 
     suspend fun getFavoriteCity(id: Long): FavoriteCity?
 
-    suspend fun setFavoriteCity(id: Long)
+    suspend fun setFavoriteCity(id: Long, lang: String)
 
     suspend fun getFavoriteCities(list: List<FavoriteCity>): List<City>
 
@@ -20,6 +20,8 @@ interface CityRepository {
     suspend fun getCities(latitude: Double, longitude: Double): List<City>
 
     suspend fun getCityByName(cityName: String): City?
+
+    suspend fun getCityImage(cityName: String): String
 
     fun getLocation(location: MutableLiveData<Location?>)
 }

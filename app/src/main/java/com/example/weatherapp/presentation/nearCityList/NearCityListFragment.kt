@@ -80,7 +80,12 @@ class NearCityListFragment : Fragment() {
 
     private fun onCityClicked(city: City) {
         this.findNavController()
-            .navigate(NearCityListFragmentDirections.actionListFragmentToDetailFragment(city))
+            .navigate(
+                NearCityListFragmentDirections.actionListFragmentToDetailFragment(
+                    city,
+                    false
+                )
+            )
     }
 
     override fun onRequestPermissionsResult(

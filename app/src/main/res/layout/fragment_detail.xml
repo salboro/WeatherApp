@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/primary_color">
 
+    <ImageView
+        android:id="@+id/cityImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:alpha="0.3"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"

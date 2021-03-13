@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
+import com.example.weatherapp.bindImage
 import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
@@ -109,11 +110,19 @@ class DetailFragment : Fragment() {
                 }
             )
 
-
-
             isFavoriteImage.setOnClickListener {
                 viewModel.setFavoriteCityCondition()
             }
+        }
+
+        if (DetailFragmentArgs.fromBundle(requireArguments()).fromFavoriteListFlag) {
+            viewModel.imageUrl.observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    bindImage(binding.cityImage, it)
+                    binding.cityImage.visibility = View.VISIBLE
+                }
+            })
+            viewModel.getCityImageUrl()
         }
     }
 

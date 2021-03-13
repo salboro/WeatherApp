@@ -7,6 +7,7 @@ import com.example.weatherapp.data.database.WeatherAppDatabaseDao
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.domain.DeleteFavoriteCityUseCase
+import com.example.weatherapp.domain.GetCityImageUseCase
 import com.example.weatherapp.domain.GetFavoriteCityUseCase
 import com.example.weatherapp.domain.SetFavoriteCityUseCase
 
@@ -22,11 +23,13 @@ class DetailViewModelFactory(
             val getFavoriteCityUseCase = GetFavoriteCityUseCase(cityRepository)
             val setFavoriteCityUseCase = SetFavoriteCityUseCase(cityRepository)
             val deleteFavoriteCityUseCase = DeleteFavoriteCityUseCase(cityRepository)
+            val getCityImageUseCase = GetCityImageUseCase(cityRepository)
             return DetailViewModel(
                 city,
                 getFavoriteCityUseCase,
                 setFavoriteCityUseCase,
-                deleteFavoriteCityUseCase
+                deleteFavoriteCityUseCase,
+                getCityImageUseCase
             ) as T
         }
         throw  IllegalArgumentException("Unknown ViewModel class")

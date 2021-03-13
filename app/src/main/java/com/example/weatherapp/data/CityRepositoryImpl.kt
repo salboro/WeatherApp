@@ -6,6 +6,7 @@ import com.example.weatherapp.data.database.FavoriteCity
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
+import com.example.weatherapp.data.network.SEARCH_IMG_URL
 import com.example.weatherapp.data.network.WeatherApi
 import com.example.weatherapp.domain.CityRepository
 
@@ -18,10 +19,15 @@ class CityRepositoryImpl(
         database.delete(FavoriteCity(id))
     }
 
+    override suspend fun getCityImage(cityName: String): String {
+        val items = WeatherApi.retrofitService.getCityImage(url = SEARCH_IMG_URL, name = cityName)
+        return items.items[0].link
+    }
+
     override suspend fun getFavoriteCity(id: Long): FavoriteCity? = database.getFavoriteCity(id)
 
-    override suspend fun setFavoriteCity(id: Long) {
-        database.insert(FavoriteCity(id))
+    override suspend fun setFavoriteCity(id: Long, lang: String) {
+        database.insert(FavoriteCity(id, lang))
     }
 
     override suspend fun getFavoriteCitiesFromDB(): List<FavoriteCity>? =
@@ -31,8 +37,12 @@ class CityRepositoryImpl(
         val favoriteCitiesToReturn = mutableListOf<City>()
         try {
             for (city in list) {
-
-                favoriteCitiesToReturn.add(WeatherApi.retrofitService.getCity(id = city.id))
+                favoriteCitiesToReturn.add(
+                    WeatherApi.retrofitService.getCity(
+                        id = city.id,
+                        language = city.lang
+                    )
+                )
             }
         } catch (e: Exception) {
 //            Log.i("Error in getting cities", e.toString())
