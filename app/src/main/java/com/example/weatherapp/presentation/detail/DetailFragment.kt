@@ -119,6 +119,9 @@ class DetailFragment : Fragment() {
             viewModel.imageUrl.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     bindImage(binding.cityImage, it)
+                    if (city.weather[0].main.toLowerCase(Locale.ROOT) == "clear") {
+                        binding.weatherImage.visibility = View.GONE
+                    }
                     binding.cityImage.visibility = View.VISIBLE
                 }
             })
