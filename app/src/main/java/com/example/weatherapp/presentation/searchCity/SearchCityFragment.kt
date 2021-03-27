@@ -13,7 +13,6 @@ import android.view.animation.LinearInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
@@ -54,9 +53,9 @@ class SearchCityFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(SearchCityFragmentViewModel::class.java)
 
-        viewModel.city.observe(viewLifecycleOwner, Observer {
+        viewModel.city.observe(viewLifecycleOwner) {
             onCityClicked(it)
-        })
+        }
 
         binding.findButton.setOnClickListener {
             getCityByName()
@@ -84,9 +83,9 @@ class SearchCityFragment : Fragment() {
         super.onConfigurationChanged(newConfig)
 
         if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-            Toast.makeText(requireContext(), "keyboard visible", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "keyboard visible", Toast.LENGTH_SHORT).show()
         } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            Toast.makeText(requireContext(), "keyboard hidden", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "keyboard hidden", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -110,7 +109,7 @@ class SearchCityFragment : Fragment() {
 
     private fun onCityClicked(city: City) {
         this.findNavController()
-            .navigate(SearchCityFragmentDirections.actionSearchCityFragmentToDetailFragment(city))
+            .navigate(SearchCityFragmentDirections.actionSearchCityFragmentToDetailHomeFragment(city))
     }
 
     override fun onResume() {

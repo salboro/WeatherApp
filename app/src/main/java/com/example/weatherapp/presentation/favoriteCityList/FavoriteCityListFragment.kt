@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
@@ -43,9 +42,9 @@ class FavoriteCityListFragment : Fragment() {
         adapter = FavoriteCitiesAdapter(::onCityClicked)
         binding.favoriteCitiesList.adapter = adapter
 
-        viewModel.cityList.observe(viewLifecycleOwner, Observer {
+        viewModel.cityList.observe(viewLifecycleOwner) {
             bindCitiesList(it)
-        })
+        }
 
         return binding.root
     }
@@ -59,7 +58,7 @@ class FavoriteCityListFragment : Fragment() {
     private fun onCityClicked(city: City) {
         this.findNavController()
             .navigate(
-                FavoriteCityListFragmentDirections.actionFavoriteCityListFragmentToDetailFragment(
+                FavoriteCityListFragmentDirections.actionFavoriteCityListFragmentToDetailHomeFragment(
                     city
                 )
             )

@@ -29,12 +29,14 @@ class NearCityListViewModel(
         viewModelScope.launch {
             if (location.value != null) {
                 _cityList.value =
-                    getCitiesUseCase(_location.value!!.latitude, location.value!!.longitude)
+                    getCitiesUseCase(_location.value!!.latitude, location.value!!.longitude)!!
             }
         }
     }
 
     fun setLocation() {
-        getLocationUseCase(_location)
+        viewModelScope.launch {
+            getLocationUseCase(_location)
+        }
     }
 }

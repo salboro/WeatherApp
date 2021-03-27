@@ -6,6 +6,29 @@ import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @JsonClass(generateAdapter = true)
+data class ForecastList(
+    val list: List<Forecast>,
+    val city: CityForForecast
+)
+
+@JsonClass(generateAdapter = true)
+data class CityForForecast(
+    val timezone: Int,
+    val sunrise: Long,
+    val sunset: Long
+)
+
+@JsonClass(generateAdapter = true)
+data class Forecast(
+    val dt: Long,
+    val main: Main,
+    val weather: List<Weather>,
+    val clouds: Cloud,
+    val wind: Wind,
+    val rain: RainForForecast?
+)
+
+@JsonClass(generateAdapter = true)
 data class Cities(
     val list: List<City>
 )
@@ -56,8 +79,14 @@ data class Country(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Rain(
-    @Json(name = "1h") val forOneHour: Double
+    @Json(name = "1h") val forOneHour: Double,
+    @Json(name = "3h") val forThreeHour: Double
 ) : Parcelable
+
+@JsonClass(generateAdapter = true)
+data class RainForForecast(
+    @Json(name = "3h") val forThreeHours: Double
+)
 
 @Parcelize
 @JsonClass(generateAdapter = true)
@@ -73,9 +102,15 @@ data class Snow(
 
 @Parcelize
 @JsonClass(generateAdapter = true)
+data class SnowForForecast(
+    @Json(name = "3h") val forThreeHours: Double
+) : Parcelable
+
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class Weather(
     val id: Long,
     val main: String,
     val description: String,
     val icon: String
-): Parcelable
+) : Parcelable

@@ -26,7 +26,6 @@ class NearCitiesAdapter(private val onClick: (City) -> Unit) :
             notifyDataSetChanged()
         }
 
-
     override fun getItemCount(): Int = data.count()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {

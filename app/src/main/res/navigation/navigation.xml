@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/NearCityListFragment">
 
@@ -10,56 +9,37 @@
         android:name="com.example.weatherapp.presentation.nearCityList.NearCityListFragment"
         android:label="City list">
         <action
-            android:id="@+id/action_listFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/slide_top_for_detail"
-            app:popEnterAnim="@anim/slide_top_for_list" />
-        <action
-            android:id="@+id/action_NearCityListFragment_to_favoriteCityListFragment"
-            app:destination="@id/favoriteCityListFragment" />
-        <action
-            android:id="@+id/action_NearCityListFragment_to_searchCityFragment"
-            app:destination="@id/searchCityFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.example.weatherapp.presentation.detail.DetailFragment"
-        android:label="Weather in city"
-        tools:layout="@layout/fragment_detail">
-        <argument
-            android:name="city"
-            app:argType="com.example.weatherapp.data.network.City" />
+            android:id="@+id/action_NearCityListFragment_to_detailHomeFragment"
+            app:destination="@id/detailHomeFragment"
+            app:popUpTo="@id/NearCityListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/favoriteCityListFragment"
         android:name="com.example.weatherapp.presentation.favoriteCityList.FavoriteCityListFragment"
         android:label="Favorite cities">
         <action
-            android:id="@+id/action_favoriteCityListFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/slide_top_for_detail"
-            app:popEnterAnim="@anim/slide_top_for_list" />
-        <action
-            android:id="@+id/action_favoriteCityListFragment_to_NearCityListFragment"
-            app:destination="@id/NearCityListFragment" />
-        <action
-            android:id="@+id/action_favoriteCityListFragment_to_searchCityFragment"
-            app:destination="@id/searchCityFragment" />
+            android:id="@+id/action_favoriteCityListFragment_to_detailHomeFragment"
+            app:destination="@id/detailHomeFragment"
+            app:popUpTo="@id/favoriteCityListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/searchCityFragment"
         android:name="com.example.weatherapp.presentation.searchCity.SearchCityFragment"
         android:label="Search city">
         <action
-            android:id="@+id/action_searchCityFragment_to_NearCityListFragment2"
-            app:destination="@id/NearCityListFragment" />
-        <action
-            android:id="@+id/action_searchCityFragment_to_favoriteCityListFragment"
-            app:destination="@id/favoriteCityListFragment" />
-        <action
-            android:id="@+id/action_searchCityFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
+            android:id="@+id/action_searchCityFragment_to_detailHomeFragment"
+            app:destination="@id/detailHomeFragment"
             app:popUpTo="@id/searchCityFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailHomeFragment"
+        android:name="com.example.weatherapp.presentation.detailHome.DetailHomeFragment"
+        android:label="DetailHomeFragment">
+        <argument
+            android:name="city"
+            app:argType="com.example.weatherapp.data.network.City" />
     </fragment>
 </navigation>

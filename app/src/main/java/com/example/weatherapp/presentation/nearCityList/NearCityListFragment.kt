@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
@@ -55,13 +54,13 @@ class NearCityListFragment : Fragment() {
 
         viewModelNearCity.setLocation()
 
-        viewModelNearCity.location.observe(viewLifecycleOwner, Observer {
+        viewModelNearCity.location.observe(viewLifecycleOwner) {
             viewModelNearCity.getCities()
-        })
+        }
 
-        viewModelNearCity.cityList.observe(viewLifecycleOwner, Observer { cities ->
+        viewModelNearCity.cityList.observe(viewLifecycleOwner) { cities ->
             bindCitiesList(cities)
-        })
+        }
 
         binding.swipeRefresh.setOnRefreshListener {
             viewModelNearCity.setLocation()
@@ -80,7 +79,11 @@ class NearCityListFragment : Fragment() {
 
     private fun onCityClicked(city: City) {
         this.findNavController()
-            .navigate(NearCityListFragmentDirections.actionListFragmentToDetailFragment(city))
+            .navigate(
+                NearCityListFragmentDirections.actionNearCityListFragmentToDetailHomeFragment(
+                    city
+                )
+            )
     }
 
     override fun onRequestPermissionsResult(
