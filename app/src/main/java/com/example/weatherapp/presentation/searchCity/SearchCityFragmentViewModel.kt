@@ -1,7 +1,6 @@
 package com.example.weatherapp.presentation.searchCity
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,7 +24,6 @@ class SearchCityFragmentViewModel(
         viewModelScope.launch {
             val city = getCityByNameUseCase(name)
             if (city != null) {
-                Log.i("asdas", city.name)
                 _city.value = city!!
             } else {
                 Toast.makeText(context, "We can't find this city", Toast.LENGTH_SHORT).show()
