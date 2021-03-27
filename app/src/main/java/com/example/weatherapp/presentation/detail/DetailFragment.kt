@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentDetailBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
+private const val ARG_PARAM1 = "param1"
 
 class DetailFragment : Fragment() {
 
@@ -23,6 +22,15 @@ class DetailFragment : Fragment() {
     private lateinit var viewModel: DetailViewModel
     private lateinit var weatherAppLocationService: WeatherAppLocationService
 
+    private var cityParam: City? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            cityParam = it.getParcelable<City>(ARG_PARAM1)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,15 +38,13 @@ class DetailFragment : Fragment() {
 
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        this.activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility = View.GONE
-
         weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
 
         val application = requireNotNull(this.activity).application
         val dataSource = WeatherAppDatabase.getInstance(application).weatherAppDatabaseDao
         viewModelFactory = DetailViewModelFactory(
             dataSource,
-            DetailFragmentArgs.fromBundle(requireArguments()).city,
+            cityParam!!,
             weatherAppLocationService
         )
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
@@ -46,9 +52,9 @@ class DetailFragment : Fragment() {
             setViewProperties(city)
         }
 
-        viewModel.isFavoriteCity.observe(viewLifecycleOwner, Observer {
+        viewModel.isFavoriteCity.observe(viewLifecycleOwner) {
             setIsFavorite(it)
-        })
+        }
 
         return binding.root
     }
@@ -123,5 +129,15 @@ class DetailFragment : Fragment() {
         } else {
             binding.isFavoriteImage.setImageResource(R.drawable.ic_star)
         }
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: City) =
+            DetailFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ARG_PARAM1, param1)
+                }
+            }
     }
 }

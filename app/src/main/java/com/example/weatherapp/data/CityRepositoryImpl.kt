@@ -1,11 +1,13 @@
 package com.example.weatherapp.data
 
 import android.location.Location
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp.data.database.FavoriteCity
 import com.example.weatherapp.data.database.WeatherAppDatabaseDao
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
+import com.example.weatherapp.data.network.ForecastList
 import com.example.weatherapp.data.network.WeatherApi
 import com.example.weatherapp.domain.CityRepository
 
@@ -31,7 +33,6 @@ class CityRepositoryImpl(
         val favoriteCitiesToReturn = mutableListOf<City>()
         try {
             for (city in list) {
-
                 favoriteCitiesToReturn.add(WeatherApi.retrofitService.getCity(id = city.id))
             }
         } catch (e: Exception) {
@@ -42,13 +43,12 @@ class CityRepositoryImpl(
     }
 
     override suspend fun getCities(latitude: Double, longitude: Double): List<City> {
-        val list = try {
+        return try {
             WeatherApi.retrofitService.getCityList(latitude = latitude, longitude = longitude).list
         } catch (e: Exception) {
 //            Log.i("Error in getting cities", e.toString())
             ArrayList()
         }
-        return list
     }
 
     override suspend fun getCityByName(cityName: String): City? {
@@ -60,7 +60,16 @@ class CityRepositoryImpl(
         }
     }
 
-    override fun getLocation(location: MutableLiveData<Location?>) {
+    override suspend fun getForecast(cityId: Long): ForecastList? {
+        return try {
+            WeatherApi.retrofitService.getCityForecast(cityId)
+        } catch (e: Exception) {
+            Log.i("Error in forecast", e.toString())
+            null
+        }
+    }
+
+    override suspend fun getLocation(location: MutableLiveData<Location?>) {
         locationService.getLastLocation {
             location.value = it
         }

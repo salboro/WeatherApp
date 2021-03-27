@@ -45,6 +45,13 @@ interface WeatherApiService{
         @Query("appid") appId: String = API_KEY,
         @Query("units") units: String = "metric"
     ): City
+
+    @GET("forecast")
+    suspend fun getCityForecast(
+        @Query("id") id: Long,
+        @Query("appid") appId: String = API_KEY,
+        @Query("units") units: String = "metric"
+    ): ForecastList
 }
 
 object WeatherApi {

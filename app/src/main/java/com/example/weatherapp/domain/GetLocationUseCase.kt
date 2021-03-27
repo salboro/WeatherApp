@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 class GetLocationUseCase(private val cityRepository: CityRepository) {
 
-    operator fun invoke(location: MutableLiveData<Location?>) {
+    suspend operator fun invoke(location: MutableLiveData<Location?>) {
         cityRepository.getLocation(location)
     }
 }
