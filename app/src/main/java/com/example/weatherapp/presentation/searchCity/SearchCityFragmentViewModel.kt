@@ -16,9 +16,9 @@ class SearchCityFragmentViewModel(
     private val context: Context
 ) : ViewModel() {
 
-    private var _city = MutableLiveData<City>()
+    private var _city = MutableLiveData<City?>()
 
-    val city: LiveData<City>
+    val city: LiveData<City?>
         get() = _city
 
     fun getCity(name: String) {
@@ -26,10 +26,14 @@ class SearchCityFragmentViewModel(
             val city = getCityByNameUseCase(name)
             if (city != null) {
                 Log.i("asdas", city.name)
-                _city.value = city
+                _city.value = city!!
             } else {
                 Toast.makeText(context, "We can't find this city", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun doneNavigating() {
+        _city.value = null
     }
 }

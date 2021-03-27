@@ -30,14 +30,12 @@
         android:label="Search city">
         <action
             android:id="@+id/action_searchCityFragment_to_detailHomeFragment"
-            app:destination="@id/detailHomeFragment"
-            app:popUpTo="@id/searchCityFragment"
-            app:popUpToInclusive="false" />
+            app:destination="@id/detailHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailHomeFragment"
         android:name="com.example.weatherapp.presentation.detailHome.DetailHomeFragment"
-        android:label="DetailHomeFragment">
+        android:label="Detail">
         <argument
             android:name="city"
             app:argType="com.example.weatherapp.data.network.City" />

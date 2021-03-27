@@ -54,14 +54,17 @@ class SearchCityFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory).get(SearchCityFragmentViewModel::class.java)
 
         viewModel.city.observe(viewLifecycleOwner) {
-            onCityClicked(it)
+            it?.let {
+                onCityFind(it!!)
+                viewModel.doneNavigating()
+            }
         }
 
         binding.findButton.setOnClickListener {
             getCityByName()
         }
 
-        binding.findButton.setOnKeyListener { v, keyCode, event ->
+        binding.findButton.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     getCityByName()
@@ -107,7 +110,7 @@ class SearchCityFragment : Fragment() {
         binding.findButton.closeKeyboard()
     }
 
-    private fun onCityClicked(city: City) {
+    private fun onCityFind(city: City) {
         this.findNavController()
             .navigate(SearchCityFragmentDirections.actionSearchCityFragmentToDetailHomeFragment(city))
     }

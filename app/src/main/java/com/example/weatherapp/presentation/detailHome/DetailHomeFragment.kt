@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.weatherapp.R
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentDetailHomeBinding
 import com.example.weatherapp.presentation.detail.DetailFragment
 import com.example.weatherapp.presentation.forecast.ForecastFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private const val NUM_PAGES = 2
 
@@ -26,7 +24,7 @@ class DetailHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        this.activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility = View.GONE
+//        this.activity?.findViewById<BottomNavigationView>(R.id.bottom_nav)?.visibility = View.GONE
 
         binding = FragmentDetailHomeBinding.inflate(layoutInflater, container, false)
 
