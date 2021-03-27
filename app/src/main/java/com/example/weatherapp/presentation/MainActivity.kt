@@ -2,6 +2,7 @@ package com.example.weatherapp.presentation
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -35,13 +36,16 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
-
-
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.myNavHostFragment)
+        Log.i(
+            "gethet",
+            navController.backStack.distinct()
+                .get(navController.backStack.size - 2).destination.displayName
+        )
         return navController.navigateUp()
     }
 
