@@ -86,7 +86,7 @@ class DetailFragment : Fragment() {
             cloudinessText.text =
                 requireContext().getString(R.string.cloudiness_format, city.clouds.cloudiness)
             humidityText.text =
-                requireContext().getString(R.string.cloudiness_format, city.main.humidity)
+                requireContext().getString(R.string.humidity_format, city.main.humidity)
             when {
                 city.rain != null -> {
                     sidenmentText.text =

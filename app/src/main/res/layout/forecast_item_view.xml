@@ -10,14 +10,17 @@
     android:layout_marginBottom="8dp"
     android:background="#00002950"
     android:padding="12dp"
-    app:cardBackgroundColor="#00002950"
-    app:cardCornerRadius="4dp">
+    app:cardBackgroundColor="#00FFFFFF"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="0dp"
+    tools:background="@color/secondary_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        tools:background="@color/secondary_color">
 
         <TextView
             android:id="@+id/day"
@@ -61,7 +64,7 @@
             android:id="@+id/temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="54dp"
             android:fontFamily="@font/roboto_bold"
             android:textColor="@color/primary_text_color"
             android:textSize="24sp"
@@ -111,24 +114,50 @@
             tools:text="5" />
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="53dp"
+            android:id="@+id/imageView3"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/windSpeed"
-            app:srcCompat="@drawable/ic_01d" />
+            app:srcCompat="@drawable/ic_humidity_icon" />
+
+        <TextView
+            android:id="@+id/humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            tools:text="55%" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/precipitationImage"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humidity"
+            app:srcCompat="@drawable/ic_rain" />
+
+        <TextView
+            android:id="@+id/precipitationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="376dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/windSpeed"
-            app:srcCompat="@drawable/ic_01d" />
+            app:layout_constraintTop_toBottomOf="@+id/precipitationImage"
+            tools:text="5 mm" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -25,7 +25,8 @@ data class Forecast(
     val weather: List<Weather>,
     val clouds: Cloud,
     val wind: Wind,
-    val rain: RainForForecast?
+    val rain: RainForForecast?,
+    val snow: SnowForForecast?
 )
 
 @JsonClass(generateAdapter = true)

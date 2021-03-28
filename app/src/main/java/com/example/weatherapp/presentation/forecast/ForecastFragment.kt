@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.weatherapp.R
 import com.example.weatherapp.data.database.WeatherAppDatabase
 import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.data.network.CityForForecast
+import com.example.weatherapp.data.network.ForecastList
 import com.example.weatherapp.databinding.FragmentForecastBinding
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -41,8 +43,17 @@ class ForecastFragment : Fragment() {
 
         binding = FragmentForecastBinding.inflate(inflater, container, false)
 
+        binding.progressBar.visibility = View.VISIBLE
+
         adapter = ForecastAdapter()
         binding.forecast.adapter = adapter
+
+        val dividerItemDecoration = DividerItemDecoration(
+            binding.forecast.context,
+            DividerItemDecoration.HORIZONTAL
+        )
+
+        binding.forecast.addItemDecoration(dividerItemDecoration)
 
         weatherAppLocationService = WeatherAppLocationService(requireContext(), requireActivity())
         val application = requireNotNull(this.activity).application
@@ -56,12 +67,19 @@ class ForecastFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ForecastViewModel::class.java)
 
         viewModel.forecast.observe(viewLifecycleOwner) { forecast ->
+            binding.progressBar.visibility = View.GONE
+            bindForecast(forecast)
             setViewProperties(forecast.city)
-            adapter.data = forecast.list
-            adapter.timeZone = forecast.city.timezone
         }
 
+
+
         return binding.root
+    }
+
+    private fun bindForecast(forecast: ForecastList) {
+        adapter.data = forecast.list
+        adapter.timeZone = forecast.city.timezone
     }
 
 

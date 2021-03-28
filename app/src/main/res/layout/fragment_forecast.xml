@@ -21,13 +21,29 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Moscow" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175"
+        tools:visibility="visible" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:background="@color/secondary_color"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/secondary_color">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/forecast"
@@ -98,5 +115,19 @@
         app:layout_constraintStart_toStartOf="@id/sunsetIcon"
         app:layout_constraintTop_toBottomOf="@+id/sunsetIcon"
         tools:text="16:20" />
+
+    <ImageView
+        android:id="@+id/dayProcessImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintEnd_toStartOf="@+id/sunsetIcon"
+        app:layout_constraintStart_toEndOf="@+id/sunriseIcon"
+        app:layout_constraintTop_toBottomOf="@id/cityName"
+        app:srcCompat="@drawable/ic_dayprocess" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
