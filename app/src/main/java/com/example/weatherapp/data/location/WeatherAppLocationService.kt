@@ -42,8 +42,8 @@ class WeatherAppLocationService(
         if (isPermissionChecked) {
             if (isLocationEnable()) {
                 locationService.lastLocation.addOnSuccessListener { location ->
-                    Log.i("asfa", "1")
                     if (location != null) {
+                        Log.i("asfa", "1")
                         setLocation(location)
                         requestNewLocation(setLocation)
                     } else {

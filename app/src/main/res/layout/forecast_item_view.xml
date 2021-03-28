@@ -8,15 +8,14 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@color/secondary_color"
+    android:background="#00002950"
     android:padding="12dp"
-    app:cardBackgroundColor="@color/secondary_color"
+    app:cardBackgroundColor="#00002950"
     app:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/secondary_color"
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
 
@@ -73,7 +72,7 @@
             tools:text="-1°" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/windIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -108,7 +107,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/windIcon"
             tools:text="5" />
 
         <ImageView

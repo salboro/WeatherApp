@@ -46,7 +46,7 @@ class CityRepositoryImpl(
         return try {
             WeatherApi.retrofitService.getCityList(latitude = latitude, longitude = longitude).list
         } catch (e: Exception) {
-//            Log.i("Error in getting cities", e.toString())
+            Log.i("Error in getting cities", e.toString())
             ArrayList()
         }
     }
