@@ -11,6 +11,10 @@
         <action
             android:id="@+id/action_NearCityListFragment_to_detailHomeFragment"
             app:destination="@id/detailHomeFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"
             app:popUpTo="@id/NearCityListFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -21,6 +25,10 @@
         <action
             android:id="@+id/action_favoriteCityListFragment_to_detailHomeFragment"
             app:destination="@id/detailHomeFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit"
             app:popUpTo="@id/favoriteCityListFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -30,7 +38,11 @@
         android:label="Search city">
         <action
             android:id="@+id/action_searchCityFragment_to_detailHomeFragment"
-            app:destination="@id/detailHomeFragment" />
+            app:destination="@id/detailHomeFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/detailHomeFragment"

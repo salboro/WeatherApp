@@ -21,6 +21,7 @@ import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentSearchCityBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.MaterialFade
 
 
 class SearchCityFragment : Fragment() {
@@ -118,6 +119,12 @@ class SearchCityFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         clickCounter = 0
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFade()
+        exitTransition = MaterialFade()
     }
 
     private fun View.closeKeyboard() {

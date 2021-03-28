@@ -13,6 +13,7 @@ import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.databinding.FragmentListFavoriteBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.MaterialFade
 
 class FavoriteCityListFragment : Fragment() {
 
@@ -62,6 +63,12 @@ class FavoriteCityListFragment : Fragment() {
                     city
                 )
             )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFade()
+        exitTransition = MaterialFade()
     }
 
     override fun onResume() {

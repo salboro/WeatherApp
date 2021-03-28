@@ -27,7 +27,7 @@ class FavoriteCityListViewModel(
         viewModelScope.launch {
             val citiesList = getFavoriteCitiesFromDBUseCase()
             if (citiesList != null) {
-                _cityList.value = getFavoriteCitiesUseCase(citiesList)
+                _cityList.value = getFavoriteCitiesUseCase(citiesList)!!
             }
         }
     }

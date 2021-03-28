@@ -16,6 +16,7 @@ import com.example.weatherapp.databinding.FragmentListNearBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.MaterialFade
 
 class NearCityListFragment : Fragment() {
 
@@ -96,5 +97,11 @@ class NearCityListFragment : Fragment() {
                 weatherAppLocationService.enablePermission()
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFade()
+        exitTransition = MaterialFade()
     }
 }
