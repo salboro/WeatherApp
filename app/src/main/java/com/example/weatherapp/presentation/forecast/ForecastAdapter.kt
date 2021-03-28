@@ -88,12 +88,33 @@ class ForecastViewHolder(
                 dateTime.dayOfMonth().asText,
                 dateTime.monthOfYear().asText
             )
+            humidity.text = context.getString(
+                R.string.humidity_forecast_format,
+                forecastItem.main.humidity
+            )
             conditionImage.setImageResource(
                 context.resources.getIdentifier(
                     "ic_${forecastItem.weather[0].icon}",
                     "drawable", context.packageName
                 )
             )
+
+            if (forecastItem.rain != null) {
+                precipitationImage.setImageResource(R.drawable.ic_rain)
+                precipitationText.text = context.getString(
+                    R.string.rain_forecast_format,
+                    forecastItem.rain.forThreeHours
+                )
+            } else if (forecastItem.snow != null) {
+                precipitationImage.setImageResource(R.drawable.ic_snow)
+                precipitationText.text = context.getString(
+                    R.string.snow_forecast_format,
+                    forecastItem.snow.forThreeHours
+                )
+            } else {
+                precipitationImage.setImageResource(R.drawable.ic_rain)
+                precipitationText.text = 0.toString()
+            }
         }
     }
 }

@@ -8,10 +8,14 @@
     <string name="wind_speed_forecast_format">%1$d m/s </string>
     <string name="real_feels_format">feels like %1$d°</string>
     <string name="cloudiness_format">cloudiness %1$d </string>
+    <string name="humidity_format">humidity %1$d%%</string>
+    <string name="humidity_forecast_format">%1$d%% </string>
     <string name="rain_format">rain %1$.1f mm</string>
+    <string name="rain_forecast_format">%1$.1fmm</string>
     <string name="hour_and_minute_date_format">%1$s:%2$s</string>
     <string name="day_date_format">%1$s\n%2$s</string>
     <string name="snow_format">snow %1$.1f mm</string>
+    <string name="snow_forecast_format">%1$.1fmm</string>
     <string name="null_precipitation">null precipitation</string>
     <string name="condition_and_sediment_format">Weather is %1$s, sediment is %2$d mm</string>
     <string name="destination_format">%1$.1f kilometers from you</string>
