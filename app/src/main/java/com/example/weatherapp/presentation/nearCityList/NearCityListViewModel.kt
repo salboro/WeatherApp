@@ -27,9 +27,9 @@ class NearCityListViewModel(
 
     fun getCities() {
         viewModelScope.launch {
-            if (location.value != null) {
+            if (_location.value != null) {
                 _cityList.value =
-                    getCitiesUseCase(_location.value!!.latitude, location.value!!.longitude)!!
+                    getCitiesUseCase(_location.value!!.latitude, _location.value!!.longitude)!!
             }
         }
     }

@@ -79,8 +79,7 @@ data class Country(
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Rain(
-    @Json(name = "1h") val forOneHour: Double,
-    @Json(name = "3h") val forThreeHour: Double
+    @Json(name = "1h") val forOneHour: Double
 ) : Parcelable
 
 @JsonClass(generateAdapter = true)
