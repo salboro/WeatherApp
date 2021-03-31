@@ -67,9 +67,7 @@ class ForecastFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ForecastViewModel::class.java)
 
         viewModel.forecast.observe(viewLifecycleOwner) { forecast ->
-            binding.progressBar.visibility = View.GONE
             bindForecast(forecast)
-            setViewProperties(forecast.city)
         }
 
 
@@ -78,6 +76,11 @@ class ForecastFragment : Fragment() {
     }
 
     private fun bindForecast(forecast: ForecastList) {
+        binding.dayProcessImage.visibility = View.VISIBLE
+        binding.sunriseIcon.visibility = View.VISIBLE
+        binding.sunsetIcon.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
+        setViewProperties(forecast.city)
         adapter.data = forecast.list
         adapter.timeZone = forecast.city.timezone
     }

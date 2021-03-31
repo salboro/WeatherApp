@@ -10,6 +10,7 @@ import com.example.weatherapp.data.network.Forecast
 import com.example.weatherapp.databinding.ForecastItemViewBinding
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
+import java.util.*
 
 class ForecastAdapter() :
     RecyclerView.Adapter<ForecastViewHolder>() {
@@ -86,7 +87,8 @@ class ForecastViewHolder(
             day.text = context.getString(
                 R.string.day_date_format,
                 dateTime.dayOfMonth().asText,
-                dateTime.monthOfYear().asText
+                dateTime.monthOfYear().getAsText(Locale.ENGLISH),
+                dateTime.dayOfWeek().getAsText(Locale.ENGLISH)
             )
             humidity.text = context.getString(
                 R.string.humidity_forecast_format,

@@ -13,7 +13,7 @@
     <string name="rain_format">rain %1$.1f mm</string>
     <string name="rain_forecast_format">%1$.1fmm</string>
     <string name="hour_and_minute_date_format">%1$s:%2$s</string>
-    <string name="day_date_format">%1$s\n%2$s</string>
+    <string name="day_date_format">%1$s\n%2$s\n%3$s</string>
     <string name="snow_format">snow %1$.1f mm</string>
     <string name="snow_forecast_format">%1$.1fmm</string>
     <string name="null_precipitation">null precipitation</string>
