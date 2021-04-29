@@ -36,7 +36,7 @@ class WeatherAppLocationService(
     private var locationService: FusedLocationProviderClient = FusedLocationProviderClient(context)
 
 
-    fun getLastLocation(setLocation: (location: Location?) -> Unit) {
+    suspend fun getLastLocation(setLocation: (location: Location?) -> Unit) {
         checkPermission()
 
         if (isPermissionChecked) {

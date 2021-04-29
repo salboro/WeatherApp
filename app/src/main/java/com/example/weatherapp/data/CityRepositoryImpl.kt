@@ -36,7 +36,7 @@ class CityRepositoryImpl(
                 favoriteCitiesToReturn.add(WeatherApi.retrofitService.getCity(id = city.id))
             }
         } catch (e: Exception) {
-//            Log.i("Error in getting cities", e.toString())
+//            Log.i("Error in getting favorite cities", e.toString())
             return ArrayList()
         }
         return favoriteCitiesToReturn.toList()
@@ -55,7 +55,7 @@ class CityRepositoryImpl(
         return try {
             WeatherApi.retrofitService.getCityByName(name = cityName)
         } catch (e: Exception) {
-//            Log.i("Error in getting cities", e.toString())
+//            Log.i("Error in getting city, e.toString())
             null
         }
     }
