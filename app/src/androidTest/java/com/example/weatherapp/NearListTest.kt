@@ -52,7 +52,6 @@ class NearListTest : KTestCase() {
             weatherAppLocationService = WeatherAppLocationService(activity, activity)
         }
 
-
         runBlocking {
             weatherAppLocationService.getLastLocation {
                 if (it != null) {
