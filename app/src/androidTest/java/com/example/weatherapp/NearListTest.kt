@@ -2,6 +2,7 @@ package com.example.weatherapp
 
 import android.Manifest
 import android.location.Location
+import androidx.test.espresso.action.GeneralLocation
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
@@ -9,6 +10,8 @@ import com.example.weatherapp.data.location.WeatherAppLocationService
 import com.example.weatherapp.data.network.City
 import com.example.weatherapp.data.network.WeatherApi
 import com.example.weatherapp.presentation.MainActivity
+import com.example.weatherapp.screen.DetailScreen
+import com.example.weatherapp.screen.FavoriteListScreen
 import com.example.weatherapp.screen.NearListScreen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -49,6 +52,7 @@ class NearListTest : KTestCase() {
             weatherAppLocationService = WeatherAppLocationService(activity, activity)
         }
 
+
         runBlocking {
             weatherAppLocationService.getLastLocation {
                 if (it != null) {
@@ -56,12 +60,13 @@ class NearListTest : KTestCase() {
                 }
             }
 
-            delay(300L)
+            delay(500L)
 
             cities = weatherApiService
                 .retrofitService
                 .getCityList(location.latitude, location.longitude)
                 .list
+
         }
 
         var distance: Int
@@ -78,14 +83,20 @@ class NearListTest : KTestCase() {
                 distance = "${if (distance > 1) "$distance kilometers" else "Less than one kilometre"} from you"
             )
         }
-
     }
 
 
     @Test
     fun checkNearCitiesListDisplayed() {
         run {
-            step("Check list") {
+            step("Displayed correct number of cities") {
+                NearListScreen {
+                    citiesList {
+                        assert(getSize() == 45)
+                    }
+                }
+            }
+            step("All items are displayed properly") {
                 NearListScreen {
                     citiesList {
                         checkCities(
@@ -97,7 +108,96 @@ class NearListTest : KTestCase() {
         }
     }
 
+    @Test
+    fun checkTransitionToDetailScreen() {
+        run {
+            step("Try to click on item") {
+                NearListScreen {
+                    citiesList {
+                        scrollTo(10)
+                        childAt<NearListScreen.CityItem>(10) {
+                            isVisible()
+                            isClickable()
+                            click()
+                        }
+                    }
+                }
+            }
+
+            step("Detail screen has correctly city information") {
+                DetailScreen {
+                    cityInfo {
+                        isDisplayed()
+//                        hasText(getResourceString(R.string.city_and_country_name_format, citiesForTest[10].cityName, citiesForTest[10].countryName))
+                        hasText("${citiesForTest[10].cityName} ${citiesForTest[10].countryName}")
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun checkMakeCityFavoriteOption() {
+        val checkIndex = 2
+        run {
+            step("Add city to favorite") {
+                NearListScreen {
+                    citiesList {
+                        scrollTo(checkIndex)
+                        childAt<NearListScreen.CityItem>(checkIndex) {
+                            isVisible()
+                            isClickable()
+                            click()
+                        }
+                    }
+                }
+
+                DetailScreen {
+                    isFavoriteImage {
+                        click()
+                    }
+
+                    navigateUpButton {
+                        click()
+                    }
+                }
+            }
+
+            step("Is there city in favorites") {
+                NearListScreen {
+                    bottomNavigationMenu {
+                        click(GeneralLocation.CENTER)
+                    }
+                }
+
+                FavoriteListScreen {
+                    favoriteCitiesList {
+                        childAt<FavoriteListScreen.FavoriteCityItem>(0) {
+                            isVisible()
+                            isClickable()
+
+                            cityName {
+                                hasText(citiesForTest[checkIndex].cityName)
+                            }
+
+                            click()
+                        }
+                    }
+                }
+            }
+
+            step("Delete city from favorite") {
+                DetailScreen {
+                    isFavoriteImage {
+                        click()
+                    }
+                }
+            }
+        }
+    }
+
     class CityTest(val cityName: String, val countryName: String, val distance: String)
+
 
     private fun checkCities(citiesTests: List<CityTest>) {
         citiesTests.forEachIndexed { index, city ->

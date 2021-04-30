@@ -17,17 +17,17 @@ class CityRepositoryImpl(
 ) : CityRepository {
 
     override suspend fun deleteFavoriteCity(id: Long) {
-        database.delete(FavoriteCity(id))
+        database.delete(database.getFavoriteCity(id)!!)
     }
 
     override suspend fun getFavoriteCity(id: Long): FavoriteCity? = database.getFavoriteCity(id)
 
     override suspend fun setFavoriteCity(id: Long) {
-        database.insert(FavoriteCity(id))
+        database.insert(FavoriteCity(id, System.currentTimeMillis()))
     }
 
     override suspend fun getFavoriteCitiesFromDB(): List<FavoriteCity>? =
-        database.getFavoriteCities()
+        database.getFavoriteCities()?.sortedByDescending { it.time }
 
     override suspend fun getFavoriteCities(list: List<FavoriteCity>): List<City> {
         val favoriteCitiesToReturn = mutableListOf<City>()
@@ -74,5 +74,4 @@ class CityRepositoryImpl(
             location.value = it
         }
     }
-
 }

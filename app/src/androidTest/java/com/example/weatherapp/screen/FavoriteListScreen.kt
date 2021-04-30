@@ -9,19 +9,16 @@ import com.agoda.kakao.text.KTextView
 import com.example.weatherapp.R
 import org.hamcrest.Matcher
 
-object NearListScreen : Screen<NearListScreen>() {
+object FavoriteListScreen : Screen<FavoriteListScreen>() {
 
-    val citiesList = KRecyclerView(
-        builder = { withId(R.id.cities_list) },
-        itemTypeBuilder = { itemType(::CityItem) }
+    val favoriteCitiesList = KRecyclerView(
+        builder = { withId(R.id.favorite_cities_list) },
+        itemTypeBuilder = { itemType(::FavoriteCityItem) }
     )
 
     val bottomNavigationMenu = KBottomNavigationView { withId(R.id.bottom_nav) }
 
-
-    class CityItem(parent: Matcher<View>) : KRecyclerItem<CityItem>(parent) {
+    class FavoriteCityItem(parent: Matcher<View>) : KRecyclerItem<FavoriteCityItem>(parent) {
         val cityName = KTextView(parent) { withId(R.id.cityNameText) }
-        val countryName = KTextView(parent) { withId(R.id.countryText) }
-        val distance = KTextView(parent) { withId(R.id.distanceText) }
     }
 }

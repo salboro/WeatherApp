@@ -11,7 +11,7 @@ abstract class KTestCase(
 ) {
 
     private companion object {
-        const val FLAKY_SAFETY_TIMEOUT = 4000L
+        const val FLAKY_SAFETY_TIMEOUT = 5000L
 
         fun getBuilder(): Kaspresso.Builder =
             Kaspresso.Builder.simple().apply {
